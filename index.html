@@ -8,9 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS BACKGROUND PANEL — Stable Rewards Edition</title>
-    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .drawer { transition: transform 0.3s ease-in-out; }
@@ -26,13 +24,11 @@
 </head>
 <body class="bg-[#1a0933] bg-gradient-to-b from-[#1a0933] to-[#0a0314] text-gray-100 font-sans min-h-screen flex flex-col select-none relative">
 
-    <!-- FLOATING VIP TELEGRAM SUPPORT BUTTON -->
     <a href="https://t.me/sgs_Update_Support" target="_blank" class="fixed bottom-6 right-6 z-50 vip-tg-btn bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-bold px-4 py-3 rounded-full flex items-center gap-2 border border-blue-400/40 shadow-2xl text-xs md:text-sm tracking-wide">
         <i class="fab fa-telegram text-base md:text-lg animate-bounce"></i>
         <span>VIP SUPPORT</span>
     </a>
 
-    <!-- DAILY REWARD POPUP OVERLAY GATEWAY -->
     <div id="dailyRewardModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
         <div class="bg-[#1f0d3d] border-2 border-amber-500/40 rounded-2xl w-full max-w-sm p-6 shadow-2xl space-y-4 relative text-center">
             <button onclick="closeDailyRewardModal()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg font-bold">&times;</button>
@@ -56,7 +52,6 @@
         </div>
     </div>
 
-    <!-- AUTH OVERLAY GATEWAY -->
     <div id="authOverlayGateway" class="fixed inset-0 bg-[#0a0314]/95 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto">
         <div class="bg-[#1f0d3d] border border-purple-900/60 rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-6">
             <div class="text-center space-y-2">
@@ -66,7 +61,6 @@
                 <p id="authSubtitle" class="text-xs text-purple-300/70 font-medium">Log into your secure provider account session</p>
             </div>
 
-            <!-- LOGIN CONTAINER -->
             <div id="loginFormContainer" class="space-y-4 block">
                 <form id="realLoginForm" onsubmit="executeEmailLogin(event)" class="space-y-4">
                     <div>
@@ -86,7 +80,6 @@
                 </form>
             </div>
 
-            <!-- SIGNUP CONTAINER -->
             <div id="signupFormContainer" class="space-y-4 hidden">
                 <form id="realSignupForm" onsubmit="executeEmailSignup(event)" class="space-y-4">
                     <div>
@@ -107,7 +100,6 @@
                 </form>
             </div>
 
-            <!-- FORGOT PASSWORD CONTAINER -->
             <div id="forgotFormContainer" class="space-y-4 hidden">
                 <form id="realForgotForm" onsubmit="executePasswordRecovery(event)" class="space-y-4">
                     <p class="text-xs text-purple-300/60 text-center">Enter email to receive password recovery link.</p>
@@ -138,7 +130,6 @@
         </div>
     </div>
 
-    <!-- MAIN APP DASHBOARD UI -->
     <header class="bg-[#120524] border-b border-purple-900/40 sticky top-0 z-40 px-4 py-3 flex items-center justify-between shadow-xl">
         <div class="flex items-center space-x-3">
             <button id="backNavBtn" onclick="handleBackNavigation()" class="text-gray-400 hover:text-white text-lg mr-1 bg-[#1f0d3d] p-2 rounded-lg border border-purple-900/40">
@@ -163,7 +154,6 @@
         </div>
     </header>
 
-    <!-- Order Success Notice -->
     <div id="orderSuccessAlert" class="hidden bg-emerald-950/80 border border-emerald-500/40 p-4 text-emerald-400 mx-4 mt-4 rounded-xl items-center justify-between shadow-2xl backdrop-blur-md animate-fade-in">
         <div class="flex items-center space-x-3">
             <div class="bg-emerald-500 text-gray-950 rounded-full p-1.5 flex items-center justify-center w-7 h-7 font-bold shadow-lg">
@@ -178,7 +168,6 @@
         <button onclick="document.getElementById('orderSuccessAlert').classList.replace('flex', 'hidden')" class="text-gray-400 hover:text-white font-bold text-xl px-2">&times;</button>
     </div>
 
-    <!-- Main Workspace Grid -->
     <div class="flex flex-1 relative">
         <aside id="drawer" class="drawer fixed top-[61px] left-0 bottom-0 w-64 bg-[#120524] border-r border-purple-900/40 z-30 transform -translate-x-full md:translate-x-0 md:sticky md:top-[61px] md:h-[calc(100vh-61px)] overflow-y-auto">
             <div class="p-3 border-b border-purple-900/20 bg-[#0b0316]/60 flex items-center space-x-2">
@@ -218,10 +207,8 @@
             </nav>
         </aside>
 
-        <!-- Content Area -->
         <main class="flex-1 p-4 md:p-6 lg:p-8 max-w-4xl mx-auto w-full">
             
-            <!-- TAB 1: NEW ORDER -->
             <section id="new-order-tab" class="tab-content block space-y-6">
                 <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 md:p-6 shadow-2xl">
                     <h2 class="text-base font-black text-white tracking-wide mb-5 uppercase border-b border-purple-900/20 pb-3 flex items-center gap-2">
@@ -268,7 +255,6 @@
                 </div>
             </section>
 
-            <!-- TAB: MY ORDERS STATUS DASHBOARD LAYER -->
             <section id="my-orders-tab" class="tab-content hidden space-y-4">
                 <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl overflow-x-auto">
                     <h3 class="text-base font-black text-white uppercase tracking-wider mb-4 border-b border-purple-900/20 pb-2"><i class="fas fa-list-check text-purple-400 mr-2"></i>Realtime Order Track Matrix</h3>
@@ -286,13 +272,11 @@
                 </div>
             </section>
 
-            <!-- TAB 2: ADD FUNDS (STABLE INTENT FLOW) -->
             <section id="add-funds-tab" class="tab-content hidden space-y-6">
                 <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl">
                     <h3 class="text-base font-black text-white uppercase tracking-wider mb-4 border-b border-purple-900/20 pb-2"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Smart Dynamic UPI QR Gateway</h3>
                     
                     <div class="grid md:grid-cols-2 gap-6">
-                        <!-- Left Panel: Smart Locked QR Box -->
                         <div class="space-y-4 flex flex-col items-center justify-center text-center p-5 bg-[#0a0314] border border-purple-900/40 rounded-xl">
                             <div id="qrLoaderState" class="w-full py-8 flex flex-col items-center justify-center">
                                 <i class="fas fa-coins text-3xl text-purple-500 mb-2 animate-bounce"></i>
@@ -310,7 +294,6 @@
                             </div>
                         </div>
 
-                        <!-- Right Panel: Smart Request Form -->
                         <form id="fundForm" onsubmit="handleFundSubmit(event)" class="space-y-4 flex flex-col justify-center">
                             <div>
                                 <label class="block text-xs font-bold text-purple-300 uppercase mb-1">1. Enter Deposit Amount (INR)</label>
@@ -336,7 +319,6 @@
                 </div>
             </section>
 
-            <!-- TAB 3: SERVICES -->
             <section id="services-tab" class="tab-content hidden space-y-4">
                 <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl overflow-x-auto">
                     <table class="w-full text-left">
@@ -346,7 +328,6 @@
                 </div>
             </section>
 
-            <!-- TAB 4: REFER & EARN -->
             <section id="refer-earn-tab" class="tab-content hidden space-y-6">
                 <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-6 shadow-2xl text-center space-y-4">
                     <div class="w-16 h-16 bg-purple-600/10 border border-purple-500/20 text-purple-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-xl">
@@ -371,7 +352,6 @@
         </main>
     </div>
 
-    <!-- EXIT WINDOW POPUP -->
     <div id="exitModal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 hidden items-center justify-center p-4">
         <div class="bg-[#120524] border border-purple-900/40 rounded-2xl w-full max-w-sm p-5 text-center space-y-4">
             <h4 class="font-black text-white text-base">Exit Application Content?</h4>
@@ -382,10 +362,8 @@
         </div>
     </div>
 
-    <!-- ADMIN MODAL GATEWAY WITH DISCRETE EXIT CONTROLS -->
     <div id="adminModal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
         <div class="bg-[#120524] border border-purple-900 w-full max-w-md p-5 rounded-2xl relative">
-            <!-- Custom Top Right Exit/Cut Button for Admin Workspace -->
             <button onclick="toggleAdminModal()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg font-bold focus:outline-none">&times;</button>
             
             <div id="adminAuthScreen" class="space-y-4 pt-2">
@@ -403,7 +381,6 @@
         </div>
     </div>
 
-    <!-- REAL-TIME INFRASTRUCTURE LAYER -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
         import { getDatabase, ref, set, push, onValue, update, get } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
@@ -641,14 +618,20 @@
                 const userTargetUid = e.target.getAttribute('data-user');
                 const depositAmountVal = parseFloat(e.target.getAttribute('data-amount'));
 
-                update(ref(db, `deposits/${txnKey}`), { status: 'Approved Real Balance Active ✅' });
-                
-                get(ref(db, `users/${userTargetUid}/balance`)).then((snapshot) => {
+                update(ref(db, `deposits/${txnKey}`), { status: 'Approved Real Balance Active ✅' })
+                .then(() => {
+                    return get(ref(db, `users/${userTargetUid}/balance`));
+                })
+                .then((snapshot) => {
                     const currentTargetBal = snapshot.val() ? parseFloat(snapshot.val()) : 0.00;
-                    set(ref(db, `users/${userTargetUid}/balance`), currentTargetBal + depositAmountVal);
+                    return set(ref(db, `users/${userTargetUid}/balance`), currentTargetBal + depositAmountVal);
+                })
+                .then(() => {
+                    alert("Credits authorized successfully.");
+                })
+                .catch((error) => {
+                    alert("Error authorizing balance: " + error.message);
                 });
-
-                alert("Credits authorized successfully.");
             }
         });
 
@@ -819,7 +802,6 @@
         targetServicesMatrix.forEach(s => { b.innerHTML += `<tr><td>${s.id}</td><td>${s.name}</td><td class="text-right text-emerald-400 font-bold">₹${s.rate}</td></tr>`; });
     </script>
 
-    <!-- NAVIGATION VIEWPORT CONTROLLERS -->
     <script>
         function toggleAuthViewState(viewId) {
             const loginBox = document.getElementById('loginFormContainer');
