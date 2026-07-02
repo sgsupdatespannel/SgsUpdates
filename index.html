@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-<meta name="google-site-verification" content="n6gutNuaXm4jPFef6_Yxsfz5UcDynkGHi86Py-8IH-0" />
-
-    
+    <meta name="google-site-verification" content="n6gutNuaXm4jPFef6_Yxsfz5UcDynkGHi86Py-8IH-0" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS BACKGROUND PANEL — Stable Rewards Edition</title>
@@ -32,20 +29,16 @@
     <div id="dailyRewardModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
         <div class="bg-[#1f0d3d] border-2 border-amber-500/40 rounded-2xl w-full max-w-sm p-6 shadow-2xl space-y-4 relative text-center">
             <button onclick="closeDailyRewardModal()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg font-bold">&times;</button>
-            
             <div class="w-16 h-16 bg-gradient-to-br from-amber-400 to-yellow-600 rounded-full flex items-center justify-center mx-auto text-2xl text-gray-950 shadow-lg shadow-amber-500/20">
                 <i class="fas fa-gift"></i>
             </div>
-            
             <div class="space-y-1">
                 <h4 class="text-lg font-black tracking-wide text-amber-400 uppercase">Daily Check-in Reward</h4>
                 <p class="text-xs text-purple-200/70">Claim your dynamic daily roll bonus to instantly add balance matrix credits into your wallet channel.</p>
             </div>
-
             <div class="bg-[#0a0314] py-3 rounded-xl border border-purple-900/40 font-mono font-bold text-sm text-purple-300">
                 Potential Drop: <span class="text-emerald-400">₹0.10 — ₹1.00</span>
             </div>
-
             <button onclick="processDailyRewardClaim()" id="claimRewardBtn" class="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black py-3 rounded-xl shadow-lg text-xs uppercase tracking-wider transition-all">
                 Claim Free Reward
             </button>
@@ -208,13 +201,11 @@
         </aside>
 
         <main class="flex-1 p-4 md:p-6 lg:p-8 max-w-4xl mx-auto w-full">
-            
             <section id="new-order-tab" class="tab-content block space-y-6">
                 <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 md:p-6 shadow-2xl">
                     <h2 class="text-base font-black text-white tracking-wide mb-5 uppercase border-b border-purple-900/20 pb-3 flex items-center gap-2">
                         <i class="fas fa-shopping-cart text-purple-400"></i> Create Order Request
                     </h2>
-                    
                     <form id="orderForm" class="space-y-5" onsubmit="handleOrderSubmit(event)">
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Category</label>
@@ -223,23 +214,18 @@
                                 <option value="instagram_likes">❤️ Instagram Likes / Engagement</option>
                             </select>
                         </div>
-
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Service Type</label>
-                            <select id="serviceSelect" onchange="calculatePrice()" class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-medium text-xs md:text-sm focus:outline-none">
-                            </select>
+                            <select id="serviceSelect" onchange="calculatePrice()" class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-medium text-xs md:text-sm focus:outline-none"></select>
                         </div>
-
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Target Video/Profile Link</label>
                             <input type="url" id="targetLink" required placeholder="https://www.instagram.com/reel/..." class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white focus:outline-none">
                         </div>
-
                         <div>
                             <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Quantity</label>
                             <input type="number" id="quantityInput" oninput="calculatePrice()" value="10000" min="50" required class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-mono font-bold focus:outline-none">
                         </div>
-
                         <div class="bg-[#0a0314] p-4 rounded-xl border border-purple-900/40 flex justify-between items-center shadow-inner">
                             <div>
                                 <span class="text-xs font-bold uppercase tracking-wider text-purple-300 block">Total Cost Charge</span>
@@ -247,7 +233,6 @@
                             </div>
                             <span class="text-2xl font-black text-emerald-400 font-mono">₹<span id="totalCost">0.00</span></span>
                         </div>
-
                         <button type="submit" id="submitOrderBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl shadow-lg uppercase text-sm tracking-wider transition-all">
                             Submit Order Request
                         </button>
@@ -275,14 +260,12 @@
             <section id="add-funds-tab" class="tab-content hidden space-y-6">
                 <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl">
                     <h3 class="text-base font-black text-white uppercase tracking-wider mb-4 border-b border-purple-900/20 pb-2"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Smart Dynamic UPI QR Gateway</h3>
-                    
                     <div class="grid md:grid-cols-2 gap-6">
                         <div class="space-y-4 flex flex-col items-center justify-center text-center p-5 bg-[#0a0314] border border-purple-900/40 rounded-xl">
                             <div id="qrLoaderState" class="w-full py-8 flex flex-col items-center justify-center">
                                 <i class="fas fa-coins text-3xl text-purple-500 mb-2 animate-bounce"></i>
                                 <p class="text-xs text-purple-300">Enter amount on the right side to lock and generate smart dynamic QR scan box.</p>
                             </div>
-                            
                             <div id="dynamicQrBox" class="hidden w-full flex flex-col items-center animate-fade-in">
                                 <div class="bg-white p-3 rounded-xl shadow-2xl mb-2">
                                     <img id="generatedSmartQrImg" src="" class="w-40 h-40">
@@ -293,7 +276,6 @@
                                 <p class="text-[9px] text-gray-400 uppercase tracking-wider">Scan via PhonePe, GPay, Paytm or any UPI App</p>
                             </div>
                         </div>
-
                         <form id="fundForm" onsubmit="handleFundSubmit(event)" class="space-y-4 flex flex-col justify-center">
                             <div>
                                 <label class="block text-xs font-bold text-purple-300 uppercase mb-1">1. Enter Deposit Amount (INR)</label>
@@ -309,7 +291,6 @@
                         </form>
                     </div>
                 </div>
-
                 <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl">
                     <h3 class="text-xs font-black text-white uppercase tracking-wider mb-3">Your Wallet Deposit Transactions History</h3>
                     <table class="w-full text-left">
@@ -337,7 +318,6 @@
                         <h3 class="text-xl font-black text-white uppercase tracking-wider">Refer & Earn Dashboard</h3>
                         <p class="text-xs text-purple-300/70 mt-1 max-w-sm mx-auto">Share your unique system link below. When someone registers an account using your code, you will get ₹5.00 automatically credited!</p>
                     </div>
-
                     <div class="bg-[#0a0314] border border-purple-900 p-4 rounded-xl max-w-md mx-auto space-y-3">
                         <span class="text-[10px] uppercase font-bold text-purple-400 tracking-widest block">Your Unique Invite Code Link</span>
                         <div class="flex gap-2">
@@ -365,7 +345,6 @@
     <div id="adminModal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4">
         <div class="bg-[#120524] border border-purple-900 w-full max-w-md p-5 rounded-2xl relative">
             <button onclick="toggleAdminModal()" class="absolute top-3 right-4 text-gray-400 hover:text-white text-lg font-bold focus:outline-none">&times;</button>
-            
             <div id="adminAuthScreen" class="space-y-4 pt-2">
                 <input type="text" id="adminUser" placeholder="Enter admin id" class="w-full bg-[#0a0314] border border-purple-900 p-2.5 rounded-xl text-white focus:outline-none">
                 <input type="password" id="adminPass" placeholder="Enter admin password" class="w-full bg-[#0a0314] border border-purple-900 p-2.5 rounded-xl text-white focus:outline-none">
@@ -410,13 +389,11 @@
             { id: 1821, category: "instagram_likes", name: "Instagram Post Active Likes ❤️ [500 Likes = ₹5]", rate: 10.00 }
         ];
 
-        // DYNAMIC DAILY BONUS CLAIM ENGINE
         window.processDailyRewardClaim = async function() {
             if(!activeUserUid) return;
             const claimBtn = document.getElementById('claimRewardBtn');
             claimBtn.disabled = true;
             claimBtn.textContent = "Rolling System Bonus Loop...";
-
             const dateStringToday = new Date().toISOString().split('T')[0];
             const rewardCheckRef = ref(db, `users/${activeUserUid}/daily_rewards/${dateStringToday}`);
 
@@ -427,14 +404,11 @@
                     closeDailyRewardModal();
                     return;
                 }
-
                 const randomBonusDropped = parseFloat((Math.random() * (1.00 - 0.10) + 0.10).toFixed(2));
                 await set(rewardCheckRef, { claimed: true, amount: randomBonusDropped, timestamp: Date.now() });
                 await set(ref(db, `users/${activeUserUid}/balance`), activeUserCurrentBalance + randomBonusDropped);
-
                 alert(`Congratulations! You rolled and successfully unlocked a free ₹${randomBonusDropped.toFixed(2)} cash drop!`);
                 closeDailyRewardModal();
-
             } catch(err) {
                 alert("Matrix Reward Gateway Interrupted: " + err.message);
                 claimBtn.disabled = false;
@@ -468,7 +442,6 @@
                 loader.classList.remove('hidden');
                 return;
             }
-
             loader.classList.add('hidden');
             qrBox.classList.remove('hidden');
             amtLabel.textContent = `₹${amt}`;
@@ -476,7 +449,6 @@
             const yourUpiId = "9117080169@upi";
             const payeeName = encodeURIComponent("Shyam Rathor");
             const upiString = `upi://pay?pa=${yourUpiId}&pn=${payeeName}&am=${amt.toFixed(2)}&cu=INR`;
-            
             qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiString)}`;
         };
 
@@ -558,7 +530,6 @@
             if(confirm("Securely sign out device?")) signOut(auth);
         };
 
-        // AUTOMATED LIVE API STATUS SYNC ENGINE
         async function syncLiveOrderStatuses(uid, ordersData) {
             try {
                 const secretSnap = await get(ref(db, 'admin_secrets/provider_api_key'));
@@ -569,9 +540,9 @@
                 
                 for (let key of Object.keys(ordersData)) {
                     const order = ordersData[key];
-                    // Agar order pehle se Completed ya Canceled hai to baar baar check nahi karenge
                     if (order.status === 'Completed' || order.status === 'Canceled' || !order.order_id) continue;
                     
+                    // CRITICAL: APNE REAL SMM PANEL KA LINK DALO YAHA (EXAMPLE: https://real-smm-panel.com/api/v2)
                     const targetApiUrl = `https://aapkaprovider.com/api/v2?key=${SECURE_KEY}&action=status&order=${order.order_id}`;
                     const res = await fetch(proxyBridgeUrl + encodeURIComponent(targetApiUrl));
                     if (res.ok) {
@@ -579,7 +550,7 @@
                         if (outerData && outerData.contents) {
                             const result = JSON.parse(outerData.contents);
                             if (result && result.status) {
-                                let cleanStatus = result.status; // Jaise 'Completed', 'Processing', 'Pending'
+                                let cleanStatus = result.status;
                                 if (cleanStatus === 'Completed' || cleanStatus === 'Success') {
                                     update(ref(db, `users/${uid}/orders/${key}`), { status: 'Completed' });
                                 } else if (cleanStatus === 'Canceled' || cleanStatus === 'Cancelled') {
@@ -603,9 +574,7 @@
                 logsTable.innerHTML = '';
                 const data = snapshot.val();
                 if(data) {
-                    // Background tracker trigger auto logic loop
                     syncLiveOrderStatuses(uid, data);
-
                     Object.keys(data).forEach(id => {
                         const o = data[id];
                         let statusColor = 'text-amber-400';
@@ -661,10 +630,8 @@
                 const userTargetUid = e.target.getAttribute('data-user');
                 const depositAmountVal = parseFloat(e.target.getAttribute('data-amount'));
 
-                // Pehle status update karenge successfully
                 update(ref(db, `deposits/${txnKey}`), { status: 'Approved Real Balance Active ✅' })
                 .then(() => {
-                    // Phir realtime me target user ka latest balance directly snapshot se nikalenge
                     return get(ref(db, `users/${userTargetUid}/balance`));
                 })
                 .then((balanceSnapshot) => {
@@ -672,7 +639,6 @@
                     if (balanceSnapshot.exists()) {
                         currentTargetBal = parseFloat(balanceSnapshot.val()) || 0.00;
                     }
-                    // Final fresh balance calculation karke database me update bhejenge
                     const finalizedNewBalance = currentTargetBal + depositAmountVal;
                     return set(ref(db, `users/${userTargetUid}/balance`), finalizedNewBalance);
                 })
@@ -684,7 +650,6 @@
                 });
             }
 
-            // DYNAMIC CANCEL CONTROL ACTION TRIGGER
             if(e.target && e.target.classList.contains('cancel-btn')) {
                 const txnKey = e.target.getAttribute('data-id');
                 if(confirm("Security Protocol: Are you sure you want to decline and cancel this request?")) {
@@ -707,7 +672,6 @@
                 alert("Please enter a valid 12-digit numeric UTR!");
                 return;
             }
-
             verifyBtn.disabled = true;
             verifyBtn.textContent = "Checking filter logs...";
 
@@ -720,14 +684,12 @@
                         if(data[k].utr === utr) isDuplicate = true;
                     });
                 }
-
                 if(isDuplicate) {
                     alert("Security Block: This UTR has already been submitted!");
                     verifyBtn.disabled = false;
                     verifyBtn.textContent = "Submit for Review";
                     return;
                 }
-
                 await set(push(ref(db, 'deposits')), {
                     user_uid: activeUserUid,
                     utr: utr,
@@ -735,20 +697,17 @@
                     status: 'Pending / Processing',
                     timestamp: Date.now()
                 });
-
                 alert("Payment logged into system queue matrix! Please wait for admin approval.");
                 document.getElementById('fundForm').reset();
                 window.updateSmartDynamicQr();
-
             } catch(err) {
                 alert("Database Error: " + err.message);
-            } finally {
+            } {
                 verifyBtn.disabled = false;
                 verifyBtn.textContent = "Submit for Review";
             }
         };
 
-        // 100% ULTIMATE PROXY ENGINE WITH LIVE BYPASS LOOP
         window.handleOrderSubmit = async function(e) {
             e.preventDefault();
             const chargeCost = parseFloat(document.getElementById('totalCost').textContent);
@@ -758,12 +717,10 @@
                 alert("Insufficient wallet account balance!");
                 return;
             }
-
             submitBtn.disabled = true;
             submitBtn.textContent = "Connecting Secure Key Engine...";
 
             try {
-                // Securely fetch key matching authenticated node framework rules
                 const secretSnap = await get(ref(db, 'admin_secrets/provider_api_key'));
                 if(!secretSnap.exists() || !secretSnap.val()) {
                     alert("Security Error: Secret Bridge Key config missing in Firebase database node!");
@@ -771,7 +728,6 @@
                     submitBtn.textContent = "Submit Order Request";
                     return;
                 }
-                
                 const SECURE_EXTRACTED_KEY = secretSnap.val();
                 submitBtn.textContent = "Processing order via Secure Server Bridge...";
 
@@ -780,8 +736,9 @@
                 const quantity = document.getElementById('quantityInput').value;
                 const selectedTextName = document.getElementById('serviceSelect').selectedOptions[0].textContent;
 
-                // Alternate OpenSource Unblocked AllOrigins Proxy Core
                 const proxyBridgeUrl = "https://api.allorigins.win/get?url=";
+                
+                // CRITICAL: APNE REAL SMM PANEL KA LINK DALO YAHA (EXAMPLE: https://real-smm-panel.com/api/v2)
                 const targetApiUrl = `https://aapkaprovider.com/api/v2?key=${SECURE_EXTRACTED_KEY}&action=add&service=${serviceId}&link=${encodeURIComponent(targetLink)}&quantity=${quantity}`;
 
                 const response = await fetch(proxyBridgeUrl + encodeURIComponent(targetApiUrl));
@@ -791,14 +748,11 @@
                 if (!outerData || !outerData.contents) throw new Error("Empty proxy wrapper payload data response.");
                 
                 const result = JSON.parse(outerData.contents);
-                console.log("Raw Response:", result);
-
                 submitBtn.disabled = false;
                 submitBtn.textContent = "Submit Order Request";
 
                 if (result && result.order) {
                     set(ref(db, `users/${activeUserUid}/balance`), activeUserCurrentBalance - chargeCost);
-                    
                     push(ref(db, `users/${activeUserUid}/orders`), {
                         order_id: result.order,
                         service_name: selectedTextName,
@@ -806,7 +760,6 @@
                         status: 'Processing',
                         timestamp: Date.now()
                     });
-
                     document.getElementById('alertOrderId').textContent = `#${result.order}`;
                     document.getElementById('alertOrderDetails').innerHTML = `<b>Service:</b> ${selectedTextName}<br><b>Link:</b> ${targetLink}<br><b>Quantity:</b> ${quantity}<br><b>Charge:</b> ₹${chargeCost.toFixed(2)}`;
                     document.getElementById('orderSuccessAlert').classList.replace('hidden', 'flex');
@@ -818,11 +771,10 @@
                 } else {
                     alert("API Interface Error: Provider returned unexpected configuration response.");
                 }
-
             } catch (err) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = "Submit Order Request";
-                alert("Network Core Error: Link target punch nahi ho pa raha hai. Kripya check karein aapka proxy server up hai ya nahi.");
+                alert("Network Core Error: Link target punch nahi ho pa raha hai. Kripya check karein aapka SMM URL code mein sahi hai ya nahi.");
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
@@ -841,7 +793,6 @@
             const select = document.getElementById('serviceSelect');
             if(!select) return;
             select.innerHTML = '';
-            
             const filtered = targetServicesMatrix.filter(x => x.category === cat);
             filtered.forEach(s => {
                 let op = document.createElement('option');
@@ -861,7 +812,6 @@
 
         window.history.pushState({ tab: 'new-order' }, '');
         window.filterServicesByCategory();
-
         const b = document.getElementById('servicesTableBody'); b.innerHTML = '';
         targetServicesMatrix.forEach(s => { b.innerHTML += `<tr><td>${s.id}</td><td>${s.name}</td><td class="text-right text-emerald-400 font-bold">₹${s.rate}</td></tr>`; });
     </script>
@@ -904,7 +854,6 @@
             }
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
             document.getElementById(`${tabId}-tab`).classList.remove('hidden');
-
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('bg-purple-600', 'text-white', 'shadow-lg');
                 btn.classList.add('text-purple-300', 'hover:bg-purple-950');
