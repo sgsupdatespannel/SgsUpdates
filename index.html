@@ -576,13 +576,15 @@
                     const res = await fetch(proxyBridgeUrl + encodeURIComponent(targetApiUrl));
                     if (res.ok) {
                         const outerData = await res.json();
-                        const result = JSON.parse(outerData.contents);
-                        if (result && result.status) {
-                            let cleanStatus = result.status; // Jaise 'Completed', 'Processing', 'Pending'
-                            if (cleanStatus === 'Completed' || cleanStatus === 'Success') {
-                                update(ref(db, `users/${uid}/orders/${key}`), { status: 'Completed' });
-                            } else if (cleanStatus === 'Canceled' || cleanStatus === 'Cancelled') {
-                                update(ref(db, `users/${uid}/orders/${key}`), { status: 'Canceled' });
+                        if (outerData && outerData.contents) {
+                            const result = JSON.parse(outerData.contents);
+                            if (result && result.status) {
+                                let cleanStatus = result.status; // Jaise 'Completed', 'Processing', 'Pending'
+                                if (cleanStatus === 'Completed' || cleanStatus === 'Success') {
+                                    update(ref(db, `users/${uid}/orders/${key}`), { status: 'Completed' });
+                                } else if (cleanStatus === 'Canceled' || cleanStatus === 'Cancelled') {
+                                    update(ref(db, `users/${uid}/orders/${key}`), { status: 'Canceled' });
+                                }
                             }
                         }
                     }
@@ -786,6 +788,8 @@
                 if (!response.ok) throw new Error("Proxy connection failed.");
                 
                 const outerData = await response.json();
+                if (!outerData || !outerData.contents) throw new Error("Empty proxy wrapper payload data response.");
+                
                 const result = JSON.parse(outerData.contents);
                 console.log("Raw Response:", result);
 
@@ -818,7 +822,7 @@
             } catch (err) {
                 submitBtn.disabled = false;
                 submitBtn.textContent = "Submit Order Request";
-                alert("Network Core Error: Link target punch nahi ho pa raha hai. Kripya check karein ki database paths secure hain.");
+                alert("Network Core Error: Link target punch nahi ho pa raha hai. Kripya check karein aapka proxy server up hai ya nahi.");
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
         };
