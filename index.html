@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS BACKGROUND PANEL — Stable Rewards Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link class="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .drawer { transition: transform 0.3s ease-in-out; }
         ::-webkit-scrollbar { width: 6px; }
@@ -128,15 +128,16 @@
                 <button onclick="toggleAuthViewState('signup')" id="authToggleBtn" class="text-purple-400 font-bold ml-1 hover:underline">Create Account</button>
             </div>
 
+            <!-- PRIVACY POLICY TOGLE BUTTON & SHIELD ALERT FOR GOOGLE REVIEW COMPLIANCE -->
             <div class="pt-3 border-t border-purple-900/40 space-y-2 text-center">
-                <p class="text-[10px] uppercase font-black text-emerald-400 tracking-wider flex items-center justify-center gap-1">
-                    <i class="fas fa-user-shield"></i> Privacy & Data Safety Shield
-                </p>
-                <p class="text-[10px] text-purple-200/60 leading-relaxed text-justify px-1">
+                <button onclick="togglePrivacyShieldView()" type="button" class="text-[10px] uppercase font-black text-emerald-400 tracking-wider flex items-center justify-center gap-1 mx-auto bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-all cursor-pointer">
+                    <i class="fas fa-user-shield"></i> Privacy & Data Safety Shield <i id="privacyShieldChevron" class="fas fa-chevron-down ml-1 text-[8px]"></i>
+                </button>
+                <div id="privacyShieldContentBox" class="hidden text-[10px] text-purple-200/60 leading-relaxed text-justify px-1 pt-1 transition-all">
                     <b>SGS Updates</b> operates strictly as an automation dashboard for social media views and marketing engagement delivery. 
                     We completely respect your privacy: <b>We do NOT collect, harvest, or store any personal social accounts data, social media passwords, or credential keys.</b> 
                     Your access session is protected via secure tokens. By logging in, you agree that this platform is a safe utility tools provider.
-                </p>
+                </div>
             </div>
         </div>
     </div>
@@ -363,6 +364,7 @@
                 </section>
             </div>
 
+            <!-- COMPLIANT COMPONENT FOOTER -->
             <footer class="mt-8 pt-6 border-t border-purple-900/30 text-center space-y-2">
                 <p class="text-xs font-bold text-purple-400">© 2026 SGS Updates. All Rights Reserved.</p>
                 <p class="text-[10px] text-purple-300/50 leading-relaxed max-w-2xl mx-auto">
@@ -899,6 +901,20 @@
             }
         }
         window.toggleAuthViewState = toggleAuthViewState;
+
+        // PRIVACY SHIELD INTERACTIVE TOGGLE SYSTEM
+        function togglePrivacyShieldView() {
+            const contentBox = document.getElementById('privacyShieldContentBox');
+            const chevron = document.getElementById('privacyShieldChevron');
+            if(contentBox.classList.contains('hidden')) {
+                contentBox.classList.remove('hidden');
+                chevron.classList.replace('fa-chevron-down', 'fa-chevron-up');
+            } else {
+                contentBox.classList.add('hidden');
+                chevron.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            }
+        }
+        window.togglePrivacyShieldView = togglePrivacyShieldView;
 
         const menuBtn = document.getElementById('menuBtn');
         const drawer = document.getElementById('drawer');
