@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS BACKGROUND PANEL — Stable Rewards Edition</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link class="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .drawer { transition: transform 0.3s ease-in-out; }
         ::-webkit-scrollbar { width: 6px; }
@@ -127,18 +127,6 @@
                 <span id="authToggleText">Don't have an account?</span>
                 <button onclick="toggleAuthViewState('signup')" id="authToggleBtn" class="text-purple-400 font-bold ml-1 hover:underline">Create Account</button>
             </div>
-
-            <!-- PRIVACY POLICY TOGLE BUTTON & SHIELD ALERT FOR GOOGLE REVIEW COMPLIANCE -->
-            <div class="pt-3 border-t border-purple-900/40 space-y-2 text-center">
-                <button onclick="togglePrivacyShieldView()" type="button" class="text-[10px] uppercase font-black text-emerald-400 tracking-wider flex items-center justify-center gap-1 mx-auto bg-emerald-500/10 px-3 py-1.5 rounded-lg border border-emerald-500/20 hover:bg-emerald-500/20 transition-all cursor-pointer">
-                    <i class="fas fa-user-shield"></i> Privacy & Data Safety Shield <i id="privacyShieldChevron" class="fas fa-chevron-down ml-1 text-[8px]"></i>
-                </button>
-                <div id="privacyShieldContentBox" class="hidden text-[10px] text-purple-200/60 leading-relaxed text-justify px-1 pt-1 transition-all">
-                    <b>SGS Updates</b> operates strictly as an automation dashboard for social media views and marketing engagement delivery. 
-                    We completely respect your privacy: <b>We do NOT collect, harvest, or store any personal social accounts data, social media passwords, or credential keys.</b> 
-                    Your access session is protected via secure tokens. By logging in, you agree that this platform is a safe utility tools provider.
-                </div>
-            </div>
         </div>
     </div>
 
@@ -219,160 +207,148 @@
             </nav>
         </aside>
 
-        <main class="flex-1 p-4 md:p-6 lg:p-8 max-w-4xl mx-auto w-full flex flex-col justify-between">
+        <main class="flex-1 p-4 md:p-6 lg:p-8 max-w-4xl mx-auto w-full">
             
-            <div>
-                <section id="new-order-tab" class="tab-content block space-y-6">
-                    <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 md:p-6 shadow-2xl">
-                        <h2 class="text-base font-black text-white tracking-wide mb-5 uppercase border-b border-purple-900/20 pb-3 flex items-center gap-2">
-                            <i class="fas fa-shopping-cart text-purple-400"></i> Create Order Request
-                        </h2>
-                        
-                        <form id="orderForm" class="space-y-5" onsubmit="handleOrderSubmit(event)">
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Category</label>
-                                <select id="categorySelect" onchange="filterServicesByCategory()" class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-medium focus:outline-none">
-                                    <option value="instagram_views">⭐ Exclusive IG Services (Views)</option>
-                                    <option value="instagram_likes">❤️ Instagram Likes / Engagement</option>
-                                </select>
-                            </div>
+            <section id="new-order-tab" class="tab-content block space-y-6">
+                <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 md:p-6 shadow-2xl">
+                    <h2 class="text-base font-black text-white tracking-wide mb-5 uppercase border-b border-purple-900/20 pb-3 flex items-center gap-2">
+                        <i class="fas fa-shopping-cart text-purple-400"></i> Create Order Request
+                    </h2>
+                    
+                    <form id="orderForm" class="space-y-5" onsubmit="handleOrderSubmit(event)">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Category</label>
+                            <select id="categorySelect" onchange="filterServicesByCategory()" class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-medium focus:outline-none">
+                                <option value="instagram_views">⭐ Exclusive IG Services (Views)</option>
+                                <option value="instagram_likes">❤️ Instagram Likes / Engagement</option>
+                            </select>
+                        </div>
 
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Service Type</label>
-                                <select id="serviceSelect" onchange="calculatePrice()" class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-medium text-xs md:text-sm focus:outline-none">
-                                </select>
-                            </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Service Type</label>
+                            <select id="serviceSelect" onchange="calculatePrice()" class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-medium text-xs md:text-sm focus:outline-none">
+                            </select>
+                        </div>
 
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Target Video/Profile Link</label>
-                                <input type="url" id="targetLink" required placeholder="https://www.instagram.com/reel/..." class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white focus:outline-none">
-                            </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Target Video/Profile Link</label>
+                            <input type="url" id="targetLink" required placeholder="https://www.instagram.com/reel/..." class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white focus:outline-none">
+                        </div>
 
-                            <div>
-                                <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Quantity</label>
-                                <input type="number" id="quantityInput" oninput="calculatePrice()" value="10000" min="50" required class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-mono font-bold focus:outline-none">
-                            </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-wider text-purple-300/70 mb-1.5">Quantity</label>
+                            <input type="number" id="quantityInput" oninput="calculatePrice()" value="10000" min="50" required class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-4 py-3 text-white font-mono font-bold focus:outline-none">
+                        </div>
 
-                            <div class="bg-[#0a0314] p-4 rounded-xl border border-purple-900/40 flex justify-between items-center shadow-inner">
-                                <div>
-                                    <span class="text-xs font-bold uppercase tracking-wider text-purple-300 block">Total Cost Charge</span>
-                                    <span class="text-[11px] text-purple-400/70 font-mono" id="rateDescriptor">Rate checking...</span>
+                        <div class="bg-[#0a0314] p-4 rounded-xl border border-purple-900/40 flex justify-between items-center shadow-inner">
+                            <div>
+                                <span class="text-xs font-bold uppercase tracking-wider text-purple-300 block">Total Cost Charge</span>
+                                <span class="text-[11px] text-purple-400/70 font-mono" id="rateDescriptor">Rate checking...</span>
+                            </div>
+                            <span class="text-2xl font-black text-emerald-400 font-mono">₹<span id="totalCost">0.00</span></span>
+                        </div>
+
+                        <button type="submit" id="submitOrderBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl shadow-lg uppercase text-sm tracking-wider transition-all">
+                            Submit Order Request
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+            <section id="my-orders-tab" class="tab-content hidden space-y-4">
+                <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl overflow-x-auto">
+                    <h3 class="text-base font-black text-white uppercase tracking-wider mb-4 border-b border-purple-900/20 pb-2"><i class="fas fa-list-check text-purple-400 mr-2"></i>Realtime Order Track Matrix</h3>
+                    <table class="w-full text-left min-w-[500px]">
+                        <thead>
+                            <tr class="text-purple-400 text-[10px] font-bold uppercase border-b border-purple-900/20 pb-2">
+                                <th class="py-2">Order ID</th>
+                                <th>Service Description Name</th>
+                                <th>Quantity</th>
+                                <th>Live Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userOrdersHistoryLog" class="text-xs divide-y divide-purple-900/20"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="add-funds-tab" class="tab-content hidden space-y-6">
+                <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl">
+                    <h3 class="text-base font-black text-white uppercase tracking-wider mb-4 border-b border-purple-900/20 pb-2"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Smart Dynamic UPI QR Gateway</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="space-y-4 flex flex-col items-center justify-center text-center p-5 bg-[#0a0314] border border-purple-900/40 rounded-xl">
+                            <div id="qrLoaderState" class="w-full py-8 flex flex-col items-center justify-center">
+                                <i class="fas fa-coins text-3xl text-purple-500 mb-2 animate-bounce"></i>
+                                <p class="text-xs text-purple-300">Enter amount on the right side to lock and generate smart dynamic QR scan box.</p>
+                            </div>
+                            
+                            <div id="dynamicQrBox" class="hidden w-full flex flex-col items-center animate-fade-in">
+                                <div class="bg-white p-3 rounded-xl shadow-2xl mb-2">
+                                    <img id="generatedSmartQrImg" src="" class="w-40 h-40">
                                 </div>
-                                <span class="text-2xl font-black text-emerald-400 font-mono">₹<span id="totalCost">0.00</span></span>
+                                <div class="bg-purple-950/40 border border-purple-800/40 px-3 py-1 rounded-full text-xs text-purple-300 font-bold mb-1">
+                                    Locked Amount: <span class="text-emerald-400 font-mono" id="qrLockedAmtDisplay">₹0</span>
+                                </div>
+                                <p class="text-[9px] text-gray-400 uppercase tracking-wider">Scan via PhonePe, GPay, Paytm or any UPI App</p>
                             </div>
+                        </div>
 
-                            <button type="submit" id="submitOrderBtn" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-xl shadow-lg uppercase text-sm tracking-wider transition-all">
-                                Submit Order Request
+                        <form id="fundForm" onsubmit="handleFundSubmit(event)" class="space-y-4 flex flex-col justify-center">
+                            <div>
+                                <label class="block text-xs font-bold text-purple-300 uppercase mb-1">1. Enter Deposit Amount (INR)</label>
+                                <input type="number" id="fundAmount" required min="1" placeholder="Minimum ₹1 — Enter Value" oninput="updateSmartDynamicQr()" class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-3 py-2.5 text-white font-bold text-sm focus:outline-none focus:border-purple-500">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-purple-300 uppercase mb-1">2. Transaction ID / UTR Number</label>
+                                <input type="text" id="fundUtr" required minlength="12" maxlength="12" placeholder="12 Digit Bank Ref/UTR No." class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-3 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-purple-500">
+                            </div>
+                            <button type="submit" id="verifyPaymentBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md">
+                                Submit for Review
                             </button>
                         </form>
                     </div>
-                </section>
+                </div>
 
-                <section id="my-orders-tab" class="tab-content hidden space-y-4">
-                    <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl overflow-x-auto">
-                        <h3 class="text-base font-black text-white uppercase tracking-wider mb-4 border-b border-purple-900/20 pb-2"><i class="fas fa-list-check text-purple-400 mr-2"></i>Realtime Order Track Matrix</h3>
-                        <table class="w-full text-left min-w-[500px]">
-                            <thead>
-                                <tr class="text-purple-400 text-[10px] font-bold uppercase border-b border-purple-900/20 pb-2">
-                                    <th class="py-2">Order ID</th>
-                                    <th>Service Description Name</th>
-                                    <th>Quantity</th>
-                                    <th>Live Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="userOrdersHistoryLog" class="text-xs divide-y divide-purple-900/20"></tbody>
-                        </table>
+                <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl">
+                    <h3 class="text-xs font-black text-white uppercase tracking-wider mb-3">Your Wallet Deposit Transactions History</h3>
+                    <table class="w-full text-left">
+                        <thead><tr class="text-purple-400 text-[10px] font-bold uppercase"><th>UTR/Txn</th><th>Amount</th><th>Queue State Status</th></tr></thead>
+                        <tbody id="userDepositHistory" class="text-xs divide-y divide-purple-900/20"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="services-tab" class="tab-content hidden space-y-4">
+                <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead><tr class="text-purple-400 text-[11px] uppercase"><th>ID Reference</th><th>Service Description Package Name</th><th class="text-right">Rate (Per 1K)</th></tr></thead>
+                        <tbody id="servicesTableBody" class="text-xs divide-y divide-purple-900/20"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section id="refer-earn-tab" class="tab-content hidden space-y-6">
+                <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-6 shadow-2xl text-center space-y-4">
+                    <div class="w-16 h-16 bg-purple-600/10 border border-purple-500/20 text-purple-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-xl">
+                        <i class="fas fa-gift"></i>
                     </div>
-                </section>
+                    <div>
+                        <h3 class="text-xl font-black text-white uppercase tracking-wider">Refer & Earn Dashboard</h3>
+                        <p class="text-xs text-purple-300/70 mt-1 max-w-sm mx-auto">Share your unique system link below. When someone registers an account using your code, you will get ₹5.00 automatically credited!</p>
+                    </div>
 
-                <section id="add-funds-tab" class="tab-content hidden space-y-6">
-                    <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl">
-                        <h3 class="text-base font-black text-white uppercase tracking-wider mb-4 border-b border-purple-900/20 pb-2"><i class="fas fa-qrcode text-purple-400 mr-2"></i>Smart Dynamic UPI QR Gateway</h3>
-                        
-                        <div class="grid md:grid-cols-2 gap-6">
-                            <div class="space-y-4 flex flex-col items-center justify-center text-center p-5 bg-[#0a0314] border border-purple-900/40 rounded-xl">
-                                <div id="qrLoaderState" class="w-full py-8 flex flex-col items-center justify-center">
-                                    <i class="fas fa-coins text-3xl text-purple-500 mb-2 animate-bounce"></i>
-                                    <p class="text-xs text-purple-300">Enter amount on the right side to lock and generate smart dynamic QR scan box.</p>
-                                </div>
-                                
-                                <div id="dynamicQrBox" class="hidden w-full flex flex-col items-center animate-fade-in">
-                                    <div class="bg-white p-3 rounded-xl shadow-2xl mb-2">
-                                        <img id="generatedSmartQrImg" src="" class="w-40 h-40">
-                                    </div>
-                                    <div class="bg-purple-950/40 border border-purple-800/40 px-3 py-1 rounded-full text-xs text-purple-300 font-bold mb-1">
-                                        Locked Amount: <span class="text-emerald-400 font-mono" id="qrLockedAmtDisplay">₹0</span>
-                                    </div>
-                                    <p class="text-[9px] text-gray-400 uppercase tracking-wider">Scan via PhonePe, GPay, Paytm or any UPI App</p>
-                                </div>
-                            </div>
-
-                            <form id="fundForm" onsubmit="handleFundSubmit(event)" class="space-y-4 flex flex-col justify-center">
-                                <div>
-                                    <label class="block text-xs font-bold text-purple-300 uppercase mb-1">1. Enter Deposit Amount (INR)</label>
-                                    <input type="number" id="fundAmount" required min="1" placeholder="Minimum ₹1 — Enter Value" oninput="updateSmartDynamicQr()" class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-3 py-2.5 text-white font-bold text-sm focus:outline-none focus:border-purple-500">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-bold text-purple-300 uppercase mb-1">2. Transaction ID / UTR Number</label>
-                                    <input type="text" id="fundUtr" required minlength="12" maxlength="12" placeholder="12 Digit Bank Ref/UTR No." class="w-full bg-[#0a0314] border border-purple-900 rounded-xl px-3 py-2.5 text-white font-mono text-sm focus:outline-none focus:border-purple-500">
-                                </div>
-                                <button type="submit" id="verifyPaymentBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-md">
-                                    Submit for Review
-                                </button>
-                            </form>
+                    <div class="bg-[#0a0314] border border-purple-900 p-4 rounded-xl max-w-md mx-auto space-y-3">
+                        <span class="text-[10px] uppercase font-bold text-purple-400 tracking-widest block">Your Unique Invite Code Link</span>
+                        <div class="flex gap-2">
+                            <input type="text" id="referralLinkInput" readonly value="Generating code..." class="w-full bg-[#120524] text-xs font-mono font-bold border border-purple-900/60 rounded-lg p-2.5 text-purple-300 select-all focus:outline-none">
+                            <button onclick="copyReferralLink()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 text-xs rounded-lg transition-colors">
+                                <i class="fas fa-copy"></i>
+                            </button>
                         </div>
                     </div>
-
-                    <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl">
-                        <h3 class="text-xs font-black text-white uppercase tracking-wider mb-3">Your Wallet Deposit Transactions History</h3>
-                        <table class="w-full text-left">
-                            <thead><tr class="text-purple-400 text-[10px] font-bold uppercase"><th>UTR/Txn</th><th>Amount</th><th>Queue State Status</th></tr></thead>
-                            <tbody id="userDepositHistory" class="text-xs divide-y divide-purple-900/20"></tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section id="services-tab" class="tab-content hidden space-y-4">
-                    <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-5 shadow-2xl overflow-x-auto">
-                        <table class="w-full text-left">
-                            <thead><tr class="text-purple-400 text-[11px] uppercase"><th>ID Reference</th><th>Service Description Package Name</th><th class="text-right">Rate (Per 1K)</th></tr></thead>
-                            <tbody id="servicesTableBody" class="text-xs divide-y divide-purple-900/20"></tbody>
-                        </table>
-                    </div>
-                </section>
-
-                <section id="refer-earn-tab" class="tab-content hidden space-y-6">
-                    <div class="bg-[#120524] border border-purple-900/30 rounded-2xl p-6 shadow-2xl text-center space-y-4">
-                        <div class="w-16 h-16 bg-purple-600/10 border border-purple-500/20 text-purple-400 rounded-full flex items-center justify-center mx-auto text-2xl shadow-xl">
-                            <i class="fas fa-gift"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-xl font-black text-white uppercase tracking-wider">Refer & Earn Dashboard</h3>
-                            <p class="text-xs text-purple-300/70 mt-1 max-w-sm mx-auto">Share your unique system link below. When someone registers an account using your code, you will get ₹5.00 automatically credited!</p>
-                        </div>
-
-                        <div class="bg-[#0a0314] border border-purple-900 p-4 rounded-xl max-w-md mx-auto space-y-3">
-                            <span class="text-[10px] uppercase font-bold text-purple-400 tracking-widest block">Your Unique Invite Code Link</span>
-                            <div class="flex gap-2">
-                                <input type="text" id="referralLinkInput" readonly value="Generating code..." class="w-full bg-[#120524] text-xs font-mono font-bold border border-purple-900/60 rounded-lg p-2.5 text-purple-300 select-all focus:outline-none">
-                                <button onclick="copyReferralLink()" class="bg-purple-600 hover:bg-purple-700 text-white font-bold px-4 text-xs rounded-lg transition-colors">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-
-            <!-- COMPLIANT COMPONENT FOOTER -->
-            <footer class="mt-8 pt-6 border-t border-purple-900/30 text-center space-y-2">
-                <p class="text-xs font-bold text-purple-400">© 2026 SGS Updates. All Rights Reserved.</p>
-                <p class="text-[10px] text-purple-300/50 leading-relaxed max-w-2xl mx-auto">
-                    <b>Disclaimer:</b> This platform is an independent Social Media Marketing (SMM) optimization dashboard service provider. 
-                    We are completely <b>NOT</b> affiliated with, associated with, authorized by, or in any way officially connected with Instagram, Meta Platforms, Inc., or any of its subsidiaries or partners.
-                </p>
-            </footer>
-
+                </div>
+            </section>
         </main>
     </div>
 
@@ -593,6 +569,7 @@
                 
                 for (let key of Object.keys(ordersData)) {
                     const order = ordersData[key];
+                    // Agar order pehle se Completed ya Canceled hai to baar baar check nahi karenge
                     if (order.status === 'Completed' || order.status === 'Canceled' || !order.order_id) continue;
                     
                     const targetApiUrl = `https://aapkaprovider.com/api/v2?key=${SECURE_KEY}&action=status&order=${order.order_id}`;
@@ -601,7 +578,7 @@
                         const outerData = await res.json();
                         const result = JSON.parse(outerData.contents);
                         if (result && result.status) {
-                            let cleanStatus = result.status;
+                            let cleanStatus = result.status; // Jaise 'Completed', 'Processing', 'Pending'
                             if (cleanStatus === 'Completed' || cleanStatus === 'Success') {
                                 update(ref(db, `users/${uid}/orders/${key}`), { status: 'Completed' });
                             } else if (cleanStatus === 'Canceled' || cleanStatus === 'Cancelled') {
@@ -624,6 +601,7 @@
                 logsTable.innerHTML = '';
                 const data = snapshot.val();
                 if(data) {
+                    // Background tracker trigger auto logic loop
                     syncLiveOrderStatuses(uid, data);
 
                     Object.keys(data).forEach(id => {
@@ -681,8 +659,10 @@
                 const userTargetUid = e.target.getAttribute('data-user');
                 const depositAmountVal = parseFloat(e.target.getAttribute('data-amount'));
 
+                // Pehle status update karenge successfully
                 update(ref(db, `deposits/${txnKey}`), { status: 'Approved Real Balance Active ✅' })
                 .then(() => {
+                    // Phir realtime me target user ka latest balance directly snapshot se nikalenge
                     return get(ref(db, `users/${userTargetUid}/balance`));
                 })
                 .then((balanceSnapshot) => {
@@ -690,6 +670,7 @@
                     if (balanceSnapshot.exists()) {
                         currentTargetBal = parseFloat(balanceSnapshot.val()) || 0.00;
                     }
+                    // Final fresh balance calculation karke database me update bhejenge
                     const finalizedNewBalance = currentTargetBal + depositAmountVal;
                     return set(ref(db, `users/${userTargetUid}/balance`), finalizedNewBalance);
                 })
@@ -701,6 +682,7 @@
                 });
             }
 
+            // DYNAMIC CANCEL CONTROL ACTION TRIGGER
             if(e.target && e.target.classList.contains('cancel-btn')) {
                 const txnKey = e.target.getAttribute('data-id');
                 if(confirm("Security Protocol: Are you sure you want to decline and cancel this request?")) {
@@ -764,6 +746,7 @@
             }
         };
 
+        // 100% ULTIMATE PROXY ENGINE WITH LIVE BYPASS LOOP
         window.handleOrderSubmit = async function(e) {
             e.preventDefault();
             const chargeCost = parseFloat(document.getElementById('totalCost').textContent);
@@ -778,6 +761,7 @@
             submitBtn.textContent = "Connecting Secure Key Engine...";
 
             try {
+                // Securely fetch key matching authenticated node framework rules
                 const secretSnap = await get(ref(db, 'admin_secrets/provider_api_key'));
                 if(!secretSnap.exists() || !secretSnap.val()) {
                     alert("Security Error: Secret Bridge Key config missing in Firebase database node!");
@@ -794,6 +778,7 @@
                 const quantity = document.getElementById('quantityInput').value;
                 const selectedTextName = document.getElementById('serviceSelect').selectedOptions[0].textContent;
 
+                // Alternate OpenSource Unblocked AllOrigins Proxy Core
                 const proxyBridgeUrl = "https://api.allorigins.win/get?url=";
                 const targetApiUrl = `https://aapkaprovider.com/api/v2?key=${SECURE_EXTRACTED_KEY}&action=add&service=${serviceId}&link=${encodeURIComponent(targetLink)}&quantity=${quantity}`;
 
@@ -901,20 +886,6 @@
             }
         }
         window.toggleAuthViewState = toggleAuthViewState;
-
-        // PRIVACY SHIELD INTERACTIVE TOGGLE SYSTEM
-        function togglePrivacyShieldView() {
-            const contentBox = document.getElementById('privacyShieldContentBox');
-            const chevron = document.getElementById('privacyShieldChevron');
-            if(contentBox.classList.contains('hidden')) {
-                contentBox.classList.remove('hidden');
-                chevron.classList.replace('fa-chevron-down', 'fa-chevron-up');
-            } else {
-                contentBox.classList.add('hidden');
-                chevron.classList.replace('fa-chevron-up', 'fa-chevron-down');
-            }
-        }
-        window.togglePrivacyShieldView = togglePrivacyShieldView;
 
         const menuBtn = document.getElementById('menuBtn');
         const drawer = document.getElementById('drawer');
