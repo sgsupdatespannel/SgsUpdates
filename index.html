@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SGS Premium SMM Engine - Production Ready</title>
+    <title>SGS Premium SMM Engine - Smart Admin Edition</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -98,9 +98,6 @@
                     <i class="fa-solid fa-wallet text-rose-500"></i>
                     <span class="text-sm font-bold tracking-wide">₹<span id="userBalance">0.00</span></span>
                 </div>
-                <button onclick="openAdminAuth()" class="bg-slate-800 border border-slate-700 hover:border-purple-500 text-xs px-3 py-2 rounded-lg font-bold uppercase transition">
-                    <i class="fa-solid fa-user-shield text-purple-400 mr-1"></i> Admin
-                </button>
             </div>
         </header>
 
@@ -128,6 +125,10 @@
                     <i class="fa-solid fa-calendar-check text-cyan-400"></i><span>Daily Reward Box</span>
                 </button>
                 
+                <button id="drawerAdminLink" onclick="launchAdminConsole()" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 hover:bg-purple-500/10 text-purple-400 font-bold hidden border border-transparent hover:border-purple-500/20">
+                    <i class="fa-solid fa-user-shield text-purple-500"></i><span>Open Admin Console</span>
+                </button>
+
                 <button onclick="handleLogout()" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 bg-red-500/10 border border-red-500/20 text-red-400 font-black tracking-wide uppercase text-xs mt-12 transition hover:bg-red-500/20">
                     <i class="fa-solid fa-power-off text-red-500"></i><span>Logout Session</span>
                 </button>
@@ -252,6 +253,32 @@
         </main>
     </div>
 
+    <div id="adminCoreConsole" class="fixed inset-0 bg-slate-950 hidden flex-col z-50">
+        <header class="bg-slate-900 border-b border-purple-900/40 p-4 flex justify-between items-center shadow-md">
+            <span class="font-black text-purple-400 text-sm tracking-wider"><i class="fa-solid fa-terminal mr-2"></i>SGS ADMIN KERNEL PIPELINE</span>
+            <button onclick="terminateAdminSession()" class="bg-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white">Close Terminal</button>
+        </header>
+        <div class="p-4 md:p-6 max-w-5xl mx-auto w-full flex-1 overflow-y-auto space-y-4">
+            <h3 class="text-xs font-black tracking-widest text-purple-300 uppercase">Live Validation Processing Stream</h3>
+            <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden text-xs">
+                <table class="w-full text-left">
+                    <thead class="bg-slate-950 text-slate-500 uppercase font-mono border-b border-slate-800">
+                        <tr>
+                            <th class="p-4">UID Node Hash</th>
+                            <th class="p-4">Current User Balance</th>
+                            <th class="p-4">Requested Value</th>
+                            <th class="p-4">UTR Reference Payload</th>
+                            <th class="p-4 text-right">Verification Triggers</th>
+                        </tr>
+                    </thead>
+                    <tbody id="adminPipelineStream">
+                        <tr><td colspan="5" class="p-6 text-center text-slate-600 italic">No incoming deposits inside real-time database validation channels.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
     <div id="bonusModal" class="fixed inset-0 bg-black/90 hidden flex items-center justify-center p-4 z-50 backdrop-blur-md">
         <div class="bg-gradient-to-b from-slate-900 to-slate-950 border border-cyan-500/40 p-6 rounded-3xl w-full max-w-sm text-center space-y-5 shadow-2xl">
             <div class="text-4xl text-cyan-400 animate-bounce"><i class="fa-solid fa-box-open"></i></div>
@@ -267,46 +294,11 @@
         </div>
     </div>
 
-    <div id="adminAuthOverlay" class="fixed inset-0 bg-black/85 hidden flex items-center justify-center p-4 z-50 backdrop-blur-md">
-        <div class="bg-slate-900 border border-purple-500/30 p-6 rounded-2xl w-full max-w-sm space-y-4">
-            <div class="flex justify-between items-center">
-                <span class="text-xs font-black tracking-widest text-purple-400 uppercase"><i class="fa-solid fa-fingerprint mr-1"></i> Root Gate Security</span>
-                <button onclick="closeAdminAuth()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-            <div class="space-y-3">
-                <input type="text" id="adminId" placeholder="Admin Registered Email" class="w-full bg-slate-950 p-3 rounded-xl border border-slate-800 text-xs focus:outline-none focus:border-purple-500 font-semibold">
-                <input type="password" id="adminPass" placeholder="Admin Secure Password" class="w-full bg-slate-950 p-3 rounded-xl border border-purple-500/30 text-xs focus:outline-none focus:border-purple-500 font-semibold">
-                <button onclick="validateAdminIdentity()" class="w-full py-3 bg-purple-600 text-white text-xs font-black tracking-wider uppercase rounded-xl shadow-lg shadow-purple-950">Authorize Terminal</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="adminCoreConsole" class="fixed inset-0 bg-slate-950 hidden flex-col z-50">
-        <header class="bg-slate-900 border-b border-purple-900/40 p-4 flex justify-between items-center shadow-md">
-            <span class="font-black text-purple-400 text-sm tracking-wider"><i class="fa-solid fa-terminal mr-2"></i>SGS ADMIN KERNEL PIPELINE</span>
-            <button onclick="terminateAdminSession()" class="bg-slate-800 px-3 py-1.5 rounded-lg text-xs font-bold text-slate-400 hover:text-white">Terminate Connection</button>
-        </header>
-        <div class="p-4 md:p-6 max-w-4xl mx-auto w-full flex-1 overflow-y-auto space-y-4">
-            <h3 class="text-xs font-black tracking-widest text-purple-300 uppercase">Pending Validation Processing Stream</h3>
-            <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden text-xs">
-                <table class="w-full text-left">
-                    <thead class="bg-slate-950 text-slate-500 uppercase font-mono border-b border-slate-800">
-                        <tr><th class="p-4">UID Node Hash</th><th class="p-4">Value Request</th><th class="p-4">UTR Reference Payload</th><th class="p-4 text-right">Verification Trigger</th></tr>
-                    </thead>
-                    <tbody id="adminPipelineStream">
-                        <tr><td colspan="4" class="p-6 text-center text-slate-600 italic">No incoming deposits inside real-time database validation channels.</td></tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
         import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signInWithPopup, GoogleAuthProvider, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-auth.js";
         import { getDatabase, ref, set, get, child, update, onValue } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
 
-        // Firebase Configuration Node Core Mapping Payload
         const firebaseConfig = {
             apiKey: "AIzaSyBxik7a3hTld_a4_exiwj38yRsHPV9IqG0",
             authDomain: "sgs-updates.firebaseapp.com",
@@ -317,24 +309,21 @@
             appId: "1:547095411322:web:0e5f4139a0e567e0ecd9c3"
         };
 
-        // Initialize Firebase Engines
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const database = getDatabase(app);
         const googleProvider = new GoogleAuthProvider();
 
-        // Local State Session Cache Registers
         let currentAuthenticatedUserToken = null;
         let userDataRecordCached = null;
 
-        // Interactive Auth Interface Tab Flow Controller
         window.toggleAuthMode = function(mode) {
             document.getElementById('loginForm').classList.toggle('hidden', mode !== 'login');
             document.getElementById('signupForm').classList.toggle('hidden', mode !== 'signup');
             document.getElementById('forgotForm').classList.toggle('hidden', mode !== 'forgot');
         };
 
-        // Firebase Auth Lifecycle Pipeline Listener
+        // Firebase Auth Lifecycle Listener
         onAuthStateChanged(auth, async (user) => {
             if (user) {
                 currentAuthenticatedUserToken = user;
@@ -342,80 +331,76 @@
                 document.getElementById('appContainer').classList.remove('hidden');
                 document.getElementById('appContainer').classList.add('flex');
 
-                // Generate User Profile Details dynamically
                 document.getElementById('drawerUserIdentity').innerText = user.email;
-                if(user.photoURL) {
-                    document.getElementById('drawerUserLogo').src = user.photoURL;
-                    document.getElementById('drawerUserLogo').classList.remove('animate-pulse');
-                } else {
-                    document.getElementById('drawerUserLogo').src = `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.uid)}`;
-                }
+                document.getElementById('drawerUserLogo').src = user.photoURL || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.uid)}`;
                 document.getElementById('referLink').innerText = `https://sgsboost.net/ref?id=${user.uid.substring(0,8)}`;
 
-                // Initialize sync connection with Realtime Database profile structural node path
+                // Auto Check Admin Role based on UID
+                const adminCheckRef = child(ref(database), `admins/${user.uid}`);
+                get(adminCheckRef).then((snapshot) => {
+                    if (snapshot.exists() && snapshot.val() === true) {
+                        // Unhide secret dashboard button in drawer only for Admin
+                        document.getElementById('drawerAdminLink').classList.remove('hidden');
+                    } else {
+                        document.getElementById('drawerAdminLink').classList.add('hidden');
+                    }
+                });
+
+                // Sync User Database Profile
                 const userDbRef = ref(database, 'users/' + user.uid);
                 onValue(userDbRef, (snapshot) => {
                     if (snapshot.exists()) {
                         userDataRecordCached = snapshot.val();
                     } else {
-                        // Provision structure if non-existent inside database context root nodes path maps
                         userDataRecordCached = { walletBalance: 0.00, dailyBonusClaimed: false, transactions: [] };
                         set(userDbRef, userDataRecordCached);
                     }
                     renderCachedUserStateData();
                 });
                 
-                // Track global stream sync values for administrative monitoring terminal panel
-                synchronizeAdminConsolePipeline();
             } else {
                 currentAuthenticatedUserToken = null;
                 document.getElementById('authContainer').classList.remove('hidden');
                 document.getElementById('appContainer').classList.add('hidden');
                 document.getElementById('appContainer').classList.remove('flex');
+                document.getElementById('drawerAdminLink').classList.add('hidden');
             }
         });
 
-        // Auth Operations - Signup Logic Pipeline
         window.handleEmailSignup = function() {
             const email = document.getElementById('registerEmail').value.trim();
             const pass = document.getElementById('registerPass').value.trim();
-            if(!email || !pass || pass.length < 6) { alert("Invalid structure format specifications parameters."); return; }
+            if(!email || !pass || pass.length < 6) { alert("Invalid inputs. Password must be 6+ chars."); return; }
 
             createUserWithEmailAndPassword(auth, email, pass)
-                .then(() => { alert("Database Node Context Registry successfully generated!"); toggleAuthMode('login'); })
-                .catch(err => alert("Auth Registry Error: " + err.message));
+                .then(() => { alert("Account created successfully!"); toggleAuthMode('login'); })
+                .catch(err => alert("Signup Error: " + err.message));
         };
 
-        // Auth Operations - Login Flow Matrix Logic 
         window.handleEmailLogin = function() {
             const email = document.getElementById('loginEmail').value.trim();
             const pass = document.getElementById('loginPass').value.trim();
-            if(!email || !pass) { alert("Missing credentials verification payload structural elements."); return; }
+            if(!email || !pass) { alert("Missing email or password fields."); return; }
 
             signInWithEmailAndPassword(auth, email, pass).catch(err => alert("Access Failure: " + err.message));
         };
 
-        // Auth Operations - Google Identity Access Pipeline
         window.handleGoogleLogin = function() {
-            signInWithPopup(auth, googleProvider).catch(err => alert("Google Auth Node Mismatch: " + err.message));
+            signInWithPopup(auth, googleProvider).catch(err => alert("Google Auth Mismatch: " + err.message));
         };
 
-        // Auth Operations - Reset Verification System Link Tokens Dispatch Pipeline
         window.handlePasswordReset = function() {
             const email = document.getElementById('forgotEmail').value.trim();
-            if(!email) { alert("Specify destination account matrix link maps email address location."); return; }
-            
+            if(!email) { alert("Specify email destination."); return; }
             sendPasswordResetEmail(auth, email)
-                .then(() => { alert("Cryptographic link reset payload vector dispatched to destination mailbox successfully!"); toggleAuthMode('login'); })
-                .catch(err => alert("Pipeline Routing Reset Error: " + err.message));
+                .then(() => { alert("Reset link dispatched to email!"); toggleAuthMode('login'); })
+                .catch(err => alert("Reset Error: " + err.message));
         };
 
-        // Auth Operations - Logout Session Pipeline 
         window.handleLogout = function() {
             signOut(auth).then(() => { if(!document.getElementById('sideDrawer').classList.contains('-translate-x-full')) toggleDrawer(); });
         };
 
-        // Render User Dynamic Profiles Context Stream Logic Functions Matrix
         function renderCachedUserStateData() {
             if(!userDataRecordCached) return;
             document.getElementById('userBalance').innerText = parseFloat(userDataRecordCached.walletBalance).toFixed(2);
@@ -423,7 +408,7 @@
             const tbody = document.getElementById('userLedgerRows');
             const txCollection = userDataRecordCached.transactions;
             if(!txCollection || Object.keys(txCollection).length === 0) {
-                tbody.innerHTML = `<tr><td colspan="3" class="pt-3 text-slate-600 italic">No tracking sessions deployed yet inside active context profile node.</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="3" class="pt-3 text-slate-600 italic">No tracking sessions deployed yet.</td></tr>`;
                 return;
             }
 
@@ -432,6 +417,7 @@
                 const t = txCollection[key];
                 let currentBadge = `<span class="bg-amber-500/10 text-amber-500 border border-amber-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
                 if(t.internalState === 'Verified') currentBadge = `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
+                if(t.internalState === 'Cancelled') currentBadge = `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
                 
                 tbody.innerHTML += `
                     <tr class="border-b border-slate-900/60">
@@ -442,13 +428,11 @@
             });
         }
 
-        // Daily Payout Matrix Rewards Logic Extraction Modules
         window.executeBonusPayout = function() {
             if(!currentAuthenticatedUserToken || !userDataRecordCached || userDataRecordCached.dailyBonusClaimed) return;
 
             const computedRandomValue = (Math.random() * (1.00 - 0.10) + 0.10).toFixed(2);
             const parsedBonusFloat = parseFloat(computedRandomValue);
-            
             const updatedBalance = parseFloat(userDataRecordCached.walletBalance) + parsedBonusFloat;
             
             update(ref(database, 'users/' + currentAuthenticatedUserToken.uid), {
@@ -459,18 +443,17 @@
                     <div class="space-y-2">
                         <p class="text-xs text-slate-400 uppercase font-bold tracking-widest">Extraction Vector Successful</p>
                         <div class="text-3xl font-black text-cyan-400 tracking-wide">+ ₹${computedRandomValue}</div>
-                        <button onclick="document.getElementById('bonusModal').classList.add('hidden')" class="mt-2 bg-slate-900 text-slate-300 text-[10px] px-4 py-2 border border-slate-800 rounded-lg uppercase font-bold tracking-widest">Close Pipeline Connection</button>
+                        <button onclick="document.getElementById('bonusModal').classList.add('hidden')" class="mt-2 bg-slate-900 text-slate-300 text-[10px] px-4 py-2 border border-slate-800 rounded-lg uppercase font-bold tracking-widest">Close</button>
                     </div>`;
             });
         };
 
-        // File Deposit Payload Report Request Matrix Submissions
         window.submitDepositToServer = function() {
             const value = parseFloat(document.getElementById('fundAmount').value);
             const utrString = document.getElementById('utrInput').value.trim();
 
             if (!value || value <= 0 || !utrString || utrString.length < 6) {
-                alert("Validation error specifications data parameter inputs context exceptions.");
+                alert("Validation error. Check input formats.");
                 return;
             }
 
@@ -483,48 +466,21 @@
                 internalState: 'Processing' 
             };
 
-            // Double reference write execution strategy
             set(ref(database, `users/${currentAuthenticatedUserToken.uid}/transactions/${uniqueTxHashKey}`), activeObjectPayload);
             set(ref(database, `global_deposits/${uniqueTxHashKey}`), activeObjectPayload).then(() => {
                 document.getElementById('fundAmount').value = '';
                 document.getElementById('utrInput').value = '';
                 generateSecureQR();
-                alert("Deposit tracking log successfully buffered inside real-time validation database!");
+                alert("Deposit request submitted successfully!");
             });
         };
 
-        // Administrative Access Verification Monitoring Streams via Firebase Role System
-        window.validateAdminIdentity = async function() {
-            const rawEmail = document.getElementById('adminId').value.trim();
-            const rawPass = document.getElementById('adminPass').value.trim();
-
-            if (!rawEmail || !rawPass) {
-                alert("Please enter both Admin Email and Password.");
-                return;
-            }
-
-            try {
-                // Step 1: Firebase Auth Authentication
-                const authResult = await signInWithEmailAndPassword(auth, rawEmail, rawPass);
-                const loggedUid = authResult.user.uid;
-
-                // Step 2: Live Server Role Verification Path Check
-                const adminCheckRef = child(ref(database), `admins/${loggedUid}`);
-                const snapshot = await get(adminCheckRef);
-
-                if (snapshot.exists() && snapshot.val() === true) {
-                    closeAdminAuth();
-                    document.getElementById('adminCoreConsole').classList.remove('hidden');
-                    document.getElementById('adminCoreConsole').classList.add('flex');
-                    synchronizeAdminConsolePipeline();
-                    alert("Root Terminal Authorized. Connection Established!");
-                } else {
-                    alert("Security Breach Intercepted: Your instance credentials do not hold explicit Admin rights.");
-                    await signOut(auth); // Core security kick rule
-                }
-            } catch (err) {
-                alert("Access Aborted: Security node validation failure or mismatch parameters.");
-            }
+        // Trigger Hidden Admin Dashboard Panel View
+        window.launchAdminConsole = function() {
+            if(!document.getElementById('sideDrawer').classList.contains('-translate-x-full')) toggleDrawer();
+            document.getElementById('adminCoreConsole').classList.remove('hidden');
+            document.getElementById('adminCoreConsole').classList.add('flex');
+            synchronizeAdminConsolePipeline();
         };
 
         window.synchronizeAdminConsolePipeline = function() {
@@ -533,7 +489,7 @@
 
             onValue(globalDepositsRef, (snapshot) => {
                 if(!snapshot.exists()) {
-                    rootTargetStream.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-600 italic">No incoming deposits inside real-time database validation channels.</td></tr>`;
+                    rootTargetStream.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-600 italic">No incoming deposits inside pipeline channels.</td></tr>`;
                     return;
                 }
                 
@@ -545,52 +501,74 @@
                     const t = collection[key];
                     if(t.internalState === 'Processing') {
                         entriesActiveCount++;
-                        rootTargetStream.innerHTML += `
-                            <tr class="border-b border-slate-900">
-                                <td class="p-4 text-slate-500 font-mono text-[10px] truncate max-w-[100px]">${t.uid}</td>
-                                <td class="p-4 font-black text-emerald-400 tracking-wide">₹${parseFloat(t.value).toFixed(2)}</td>
-                                <td class="p-4 font-mono text-slate-300">${t.utr}</td>
-                                <td class="p-4 text-right">
-                                    <button onclick="commitStateVerification('${t.uid}', '${t.structId}', ${t.value})" class="bg-purple-600 hover:bg-purple-500 font-bold px-4 py-1.5 rounded-lg uppercase tracking-widest text-[10px]">Verify Transaction</button>
-                                </td>
-                            </tr>`;
+                        
+                        // Fetch target user's current live balance dynamically before admin takes action
+                        const userBalRef = ref(database, `users/${t.uid}/walletBalance`);
+                        get(userBalRef).then((balanceSnap) => {
+                            const currentLiveBal = balanceSnap.exists() ? parseFloat(balanceSnap.val()).toFixed(2) : "0.00";
+                            const rowId = `row_${t.structId}`;
+                            
+                            // Prevent duplicating rows on dynamic sync re-render loops
+                            if(!document.getElementById(rowId)) {
+                                rootTargetStream.innerHTML += `
+                                    <tr id="${rowId}" class="border-b border-slate-900">
+                                        <td class="p-4 text-slate-500 font-mono text-[10px] truncate max-w-[100px]">${t.uid}</td>
+                                        <td class="p-4 font-bold text-amber-400">₹${currentLiveBal}</td>
+                                        <td class="p-4 font-black text-emerald-400 tracking-wide">₹${parseFloat(t.value).toFixed(2)}</td>
+                                        <td class="p-4 font-mono text-slate-300">${t.utr}</td>
+                                        <td class="p-4 text-right space-x-2 flex justify-end">
+                                            <button onclick="commitStateVerification('${t.uid}', '${t.structId}', ${t.value}, 'approve')" class="bg-emerald-600 hover:bg-emerald-500 font-bold px-3 py-1.5 rounded-lg uppercase tracking-widest text-[10px]">Approve</button>
+                                            <button onclick="commitStateVerification('${t.uid}', '${t.structId}', ${t.value}, 'cancel')" class="bg-red-600 hover:bg-red-500 font-bold px-3 py-1.5 rounded-lg uppercase tracking-widest text-[10px]">Cancel</button>
+                                        </td>
+                                    </tr>`;
+                            }
+                        });
                     }
                 });
 
-                if(entriesActiveCount === 0) {
-                    rootTargetStream.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-600 italic">No incoming deposits inside real-time database validation channels.</td></tr>`;
-                }
+                setTimeout(() => {
+                    if(rootTargetStream.children.length === 0 || entriesActiveCount === 0) {
+                        rootTargetStream.innerHTML = `<tr><td colspan="5" class="p-6 text-center text-slate-600 italic">No incoming deposits inside pipeline channels.</td></tr>`;
+                    }
+                }, 500);
             });
         };
 
-        window.commitStateVerification = function(targetUid, structId, txnValue) {
-            update(ref(database, `users/${targetUid}/transactions/${structId}`), { internalState: 'Verified' });
+        // Approve or Cancel Core Action Logic Stream
+        window.commitStateVerification = function(targetUid, structId, txnValue, actionType) {
+            const finalState = actionType === 'approve' ? 'Verified' : 'Cancelled';
+            
+            // Update individual user log
+            update(ref(database, `users/${targetUid}/transactions/${structId}`), { internalState: finalState });
+            // Remove from global queue
             set(ref(database, `global_deposits/${structId}`), null);
             
-            const targetBalanceRef = ref(database, `users/${targetUid}/walletBalance`);
-            get(targetBalanceRef).then((snap) => {
-                let currentBal = snap.exists() ? parseFloat(snap.val()) : 0;
-                set(targetBalanceRef, currentBal + parseFloat(txnValue));
-            });
+            if(actionType === 'approve') {
+                const targetBalanceRef = ref(database, `users/${targetUid}/walletBalance`);
+                get(targetBalanceRef).then((snap) => {
+                    let currentBal = snap.exists() ? parseFloat(snap.val()) : 0;
+                    set(targetBalanceRef, currentBal + parseFloat(txnValue));
+                });
+            }
+            alert(`Transaction successfully marked as: ${finalState}`);
         };
 
-        // Real API Order dispatch simulation logic
         window.executeSMMPipelineOrder = function() {
             const rateCost = parseFloat(document.getElementById('serviceSelect').value);
             const qty = parseInt(document.getElementById('targetOrderQty').value);
             const link = document.getElementById('targetOrderLink').value.trim();
 
-            if(!qty || qty <= 0 || !link) { alert("Provide comprehensive target order metrics configuration arrays."); return; }
+            if(!qty || qty <= 0 || !link) { alert("Provide comprehensive target link and quantity."); return; }
             
             const realTimeComputedCost = (rateCost / 1000) * qty;
             if(userDataRecordCached.walletBalance < realTimeComputedCost) {
-                alert(`Insufficient wallet balance. Total payload cost requirement metric: ₹${realTimeComputedCost.toFixed(2)}`);
+                alert(`Insufficient wallet balance. Total cost: ₹${realTimeComputedCost.toFixed(2)}`);
                 return;
             }
 
             const updatedUserBalancePostOrder = parseFloat(userDataRecordCached.walletBalance) - realTimeComputedCost;
             update(ref(database, 'users/' + currentAuthenticatedUserToken.uid), { walletBalance: updatedUserBalancePostOrder }).then(() => {
-                alert(`Order dispatched successfully inside AAPKAPROVIDER API stream sequence pipelines!\nTotal Deducted: ₹${realTimeComputedCost.toFixed(2)}`);
+                alert(`Order dispatched successfully inside AAPKAPROVIDER stream!\nTotal Deducted: ₹${realTimeComputedCost.toFixed(2)}`);
                 document.getElementById('targetOrderQty').value = '';
                 document.getElementById('targetOrderLink').value = '';
             });
@@ -667,11 +645,13 @@
             }
         }
 
+        function showDailyBonus() {
+            document.getElementById('bonusModal').classList.remove('hidden');
+        }
+
         function terminateAdminSession() {
             document.getElementById('adminCoreConsole').classList.add('hidden');
             document.getElementById('adminCoreConsole').classList.remove('flex');
-            document.getElementById('adminId').value = '';
-            document.getElementById('adminPass').value = '';
         }
     </script>
 </body>
