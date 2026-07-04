@@ -164,6 +164,7 @@
             <!-- Tab 1: Dashboard / New Order System -->
             <section id="tab-dashboard" class="space-y-6 tab-content">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Order Config Panel -->
                     <div class="md:col-span-2 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
                         <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-amber-400 uppercase tracking-wider">
                             <i class="fa-brands fa-instagram mr-2 text-rose-500"></i>Instagram Engine API
@@ -195,6 +196,7 @@
                             <input type="number" id="targetOrderQty" oninput="calculateRealtimeCost()" placeholder="Min: 100 - Max: 500,000" class="w-full bg-slate-950 p-3.5 rounded-xl border border-slate-800 focus:outline-none focus:border-rose-500 text-sm font-bold">
                         </div>
 
+                        <!-- LIVE DYNAMIC COST INTERFACE BOX -->
                         <div id="costDisplayBox" class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex justify-between items-center transition-all duration-300">
                             <span class="text-xs uppercase tracking-wider font-bold text-slate-400">Total Price Estimate</span>
                             <span class="text-xl font-black text-rose-500">₹<span id="calculatedCostText">0.00</span></span>
@@ -467,7 +469,7 @@
             tbody.innerHTML = '';
             Object.keys(txCollection).forEach(key => {
                 const t = txCollection[key];
-                let currentBadge = `<span class="bg-amber-500/10 text-amber-500 border border-amber-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
+                let currentBadge = `<span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
                 if(t.internalState === 'Verified') currentBadge = `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
                 if(t.internalState === 'Cancelled') currentBadge = `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
                 
@@ -488,7 +490,6 @@
             const targetApiEndpointUrl = "https://aapkaprovider.com/api/v2";
             const secureMaskedTokenKey = "NDYzYjVhOWE3OTExMmJjZDBmMDkwZjRkM2EzM2RiM2Y=";
 
-            // Sequential async fetch iteration loop execution pattern
             for (let key in ordersList) {
                 const o = ordersList[key];
                 
@@ -502,21 +503,18 @@
                         statusPayload.append("action", "status");
                         statusPayload.append("order", rawNumericOrderId);
 
-                        // Direct Cross-Origin API Request fetch operation pipeline
                         const res = await fetch(targetApiEndpointUrl, { method: "POST", body: statusPayload });
                         const statusData = await res.json();
 
                         if (statusData && statusData.status) {
                             let providerStatus = statusData.status.trim();
                             
-                            // Map formatting to match frontend UI system design specs strings capitalization
                             if (providerStatus.toLowerCase() === 'completed') providerStatus = 'Completed';
                             if (providerStatus.toLowerCase() === 'pending') providerStatus = 'Pending';
                             if (providerStatus.toLowerCase() === 'processing' || providerStatus.toLowerCase() === 'in progress') providerStatus = 'Processing';
                             if (providerStatus.toLowerCase() === 'canceled' || providerStatus.toLowerCase() === 'cancelled') providerStatus = 'Cancelled';
                             
                             if (providerStatus !== o.status) {
-                                // Real-time state update committed securely to user storage reference mapping
                                 await update(ref(database, `users/${currentAuthenticatedUserToken.uid}/orders/${key}`), {
                                     status: providerStatus
                                 });
@@ -555,12 +553,16 @@
             });
         }
 
+        // ================= FIXED DAILY PAYOUT REWARDS LOGIC EXTRACTION =================
         window.executeBonusPayout = function() {
             if(!currentAuthenticatedUserToken || !userDataRecordCached || userDataRecordCached.dailyBonusClaimed) return;
-            const computedRandomValue = (Math.random() * (1.00 - 0.10) + 0.10).toFixed(2);
+
+            // Generate localized dynamic metrics strictly under ₹1.00 (between 0.10 and 0.99)
+            const computedRandomValue = (Math.random() * (0.99 - 0.10) + 0.10).toFixed(2);
             const parsedBonusFloat = parseFloat(computedRandomValue);
             const updatedBalance = parseFloat(userDataRecordCached.walletBalance) + parsedBonusFloat;
             
+            // Push directly to Firebase Realtime Database
             update(ref(database, 'users/' + currentAuthenticatedUserToken.uid), {
                 walletBalance: updatedBalance,
                 dailyBonusClaimed: true
@@ -571,6 +573,8 @@
                         <div class="text-3xl font-black text-cyan-400 tracking-wide">+ ₹${computedRandomValue}</div>
                         <button onclick="document.getElementById('bonusModal').classList.add('hidden')" class="mt-2 bg-slate-900 text-slate-300 text-[10px] px-4 py-2 border border-slate-800 rounded-lg uppercase font-bold tracking-widest">Close</button>
                     </div>`;
+            }).catch((err) => {
+                alert("Database Payout Error: " + err.message);
             });
         };
 
@@ -730,12 +734,15 @@
                 { name: "10292 - 🚀 Instagram Views ( 🚀 1Million Per Day ) Emergency — Cancel Button Enabled ☑️ — ₹0.25 per 1000", cost: 0.25 }
             ],
             likes: [
-                { name: "20441 - ❤️ Instagram Instant Likes [Real Profile Matrix] — ₹4.50 per 1000", cost: 4.50 },
-                { name: "20882 - 🔥 Instagram Super Organic Likes [Monetization Safe] — ₹6.80 per 1000", cost: 6.80 }
+                { name: "14270 - ⭐ Instagram Likes (HQ + Real Accounts 👤)(Non Drop 💧)(100K/D🔥) — ₹6.21 per 1000", cost: 6.21 },
+                { name: "13914 - ⭐ Instagram Likes (Real Accounts 👤)(Low Drop 💧)(300K/D🔥) — ₹6.50 per 1000", cost: 6.50 },
+                { name: "14139 - ⭐ Instagram Likes (Old Accounts 👤)(Non Drop 💧)(100K/D🔥) — ₹8.43 per 1000", cost: 8.43 },
+                { name: "13713 - ⭐ Instagram Likes (Real Accounts 👤)(Non Drop 💧)(500K+/D🔥) — ₹9.14 per 1000", cost: 9.14 },
+                { name: "14055 - ⭐ Instagram Likes (HQ Real Accounts 👤)(Non Drop 💧)(500K/D🔥) — ₹9.78 per 1000", cost: 9.78 }
             ],
             followers: [
-                { name: "30551 - 👥 Instagram Premium Followers [Non-Drop Warranty] — ₹45.00 per 1000", cost: 45.00 },
-                { name: "30990 - 👑 Instagram High-Quality Indian Targeted Followers — ₹95.00 per 1000", cost: 95.00 }
+                { name: "14321 - 🚀 Instagram Followers (Real Account 👤)(Cheapest⭐)(No Refill ⚠️)(10-20K/Day ⚡) — ₹18.10 per 1000", cost: 18.10 },
+                { name: "14322 - 🚀 Instagram Followers (Old Account 👤)(Cheapest⭐)(No Refill ⚠️)(50-100K/Day ⚡) — ₹26.83 per 1000", cost: 26.83 }
             ]
         };
 
@@ -775,7 +782,6 @@
                 activeBtn.className = "w-full text-left p-3 rounded-xl flex items-center space-x-3 bg-gradient-to-r from-rose-500/10 to-transparent border-l-4 border-rose-500 font-bold tab-btn text-white";
             }
             
-            // Trigger automatic loop check logic whenever user views order grid section
             if (targetId === 'myorders' && typeof window.syncOrdersStatusFromProvider === 'function') {
                 window.syncOrdersStatusFromProvider();
             }
@@ -821,7 +827,10 @@
             } else { container.classList.add('hidden'); prompt.classList.remove('hidden'); summary.classList.add('hidden'); }
         }
 
-        function showDailyBonus() { document.getElementById('bonusModal').classList.remove('hidden'); }
+        function showDailyBonus() { 
+            // Re-render raw layout structures if modal triggers to clear historical static data sessions
+            document.getElementById('bonusModal').classList.remove('hidden'); 
+        }
         function terminateAdminSession() { document.getElementById('adminCoreConsole').classList.add('hidden'); document.getElementById('adminCoreConsole').classList.remove('flex'); }
         function showPolicy(type) {
             if(type === 'privacy') {
