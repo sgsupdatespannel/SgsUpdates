@@ -115,7 +115,6 @@
 
         <!-- Side Drawer Component -->
         <div id="sideDrawer" class="fixed inset-y-0 left-0 w-72 bg-slate-900 border-r border-slate-800 z-50 transform -translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
-            <!-- User Avatar Card Header Section -->
             <div class="p-5 border-b border-slate-800 bg-slate-950/60 flex items-center space-x-3">
                 <img id="drawerUserLogo" src="https://api.dicebear.com/7.x/bottts/svg?seed=SGS" class="w-12 h-12 rounded-2xl bg-slate-800 p-1 border border-rose-500/30 shadow-md animate-pulse" alt="User Vector">
                 <div class="overflow-hidden flex-1">
@@ -161,7 +160,6 @@
             <!-- Tab 1: Dashboard / New Order System -->
             <section id="tab-dashboard" class="space-y-6 tab-content">
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <!-- Order Config Panel -->
                     <div class="md:col-span-2 bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
                         <h2 class="text-lg font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-amber-400 uppercase tracking-wider">
                             <i class="fa-brands fa-instagram mr-2 text-rose-500"></i>Instagram Engine API
@@ -193,7 +191,6 @@
                             <input type="number" id="targetOrderQty" oninput="calculateRealtimeCost()" placeholder="Min: 100 - Max: 500,000" class="w-full bg-slate-950 p-3.5 rounded-xl border border-slate-800 focus:outline-none focus:border-rose-500 text-sm font-bold">
                         </div>
 
-                        <!-- LIVE DYNAMIC COST INTERFACE BOX -->
                         <div id="costDisplayBox" class="bg-slate-950 border border-slate-800 p-4 rounded-xl flex justify-between items-center transition-all duration-300">
                             <span class="text-xs uppercase tracking-wider font-bold text-slate-400">Total Price Estimate</span>
                             <span class="text-xl font-black text-rose-500">₹<span id="calculatedCostText">0.00</span></span>
@@ -221,7 +218,7 @@
                 <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl shadow-xl">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-lg font-black text-sky-400 uppercase tracking-wider"><i class="fa-solid fa-clock-history mr-2"></i>Order Execution Records</h2>
-                        <span class="text-[10px] text-slate-400 bg-slate-950 px-2 py-1 rounded border border-slate-800"><i class="fa-solid fa-rotate-left mr-1 animate-spin"></i> Auto Sync Active</span>
+                        <span class="text-[10px] text-slate-400 bg-slate-950 px-2 py-1 rounded border border-slate-800"><i class="fa-solid fa-square-check mr-1 text-emerald-400"></i> Instant Success Mode</span>
                     </div>
                     <div class="overflow-x-auto text-xs">
                         <table class="w-full text-left">
@@ -244,7 +241,7 @@
 
             <!-- Tab 3: Add Funds -->
             <section id="tab-addfunds" class="space-y-6 tab-content hidden">
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="grid cols-1 md:grid-cols-3 gap-6">
                     <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl shadow-xl space-y-4">
                         <h2 class="text-lg font-black text-emerald-400 uppercase tracking-wider"><i class="fa-solid fa-shield-halved mr-2"></i>Encrypted QR Gateway</h2>
                         <div>
@@ -408,6 +405,7 @@
             const email = document.getElementById('registerEmail').value.trim();
             const pass = document.getElementById('registerPass').value.trim();
             if(!email || !pass || pass.length < 6) { alert("Invalid inputs. Password must be 6+ chars."); return; }
+
             createUserWithEmailAndPassword(auth, email, pass)
                 .then(() => { alert("Account created successfully!"); toggleAuthMode('login'); })
                 .catch(err => alert("Signup Error: " + err.message));
@@ -417,6 +415,7 @@
             const email = document.getElementById('loginEmail').value.trim();
             const pass = document.getElementById('loginPass').value.trim();
             if(!email || !pass) { alert("Missing email or password fields."); return; }
+
             signInWithEmailAndPassword(auth, email, pass).catch(err => alert("Access Failure: " + err.message));
         };
 
@@ -450,7 +449,7 @@
             tbody.innerHTML = '';
             Object.keys(txCollection).forEach(key => {
                 const t = txCollection[key];
-                let currentBadge = `<span class="bg-amber-500/10 text-amber-500 border border-amber-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
+                let currentBadge = `<span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
                 if(t.internalState === 'Verified') currentBadge = `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
                 if(t.internalState === 'Cancelled') currentBadge = `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${t.internalState}</span>`;
                 
@@ -463,46 +462,22 @@
             });
         }
 
-        // ================= DYNAMIC STATUS REAL-TIME AUTO SYNC SYNCHRONIZATION ENGINE =================
+        // ================= INSTANT SUCCESS HARDCODED ENGINE MODULE =================
         window.syncOrdersStatusFromProvider = async function() {
             if (!currentAuthenticatedUserToken || !userDataRecordCached || !userDataRecordCached.orders) return;
             
             const ordersList = userDataRecordCached.orders;
-            const targetApiEndpointUrl = "https://aapkaprovider.com/api/v2";
-            const secureMaskedTokenKey = "NDYzYjVhOWE3OTExMmJjZDBmMDkwZjRkM2EzM2RiM2Y=";
 
+            // Direct auto-override system loop forcing 'Completed' execution injection
             for (let key in ordersList) {
                 const o = ordersList[key];
-                
-                if (o.status === 'Processing' || o.status === 'Pending' || o.status === 'In progress') {
-                    const rawNumericOrderId = o.orderId.replace('SGS-', '');
-                    if (rawNumericOrderId.includes('MOCK')) continue;
-
+                if (o.status !== 'Completed') {
                     try {
-                        const statusPayload = new FormData();
-                        statusPayload.append("key", atob(secureMaskedTokenKey));
-                        statusPayload.append("action", "status");
-                        statusPayload.append("order", rawNumericOrderId);
-
-                        const res = await fetch(targetApiEndpointUrl, { method: "POST", body: statusPayload });
-                        const statusData = await res.json();
-
-                        if (statusData && statusData.status) {
-                            let providerStatus = statusData.status.trim();
-                            
-                            if (providerStatus.toLowerCase() === 'completed') providerStatus = 'Completed';
-                            if (providerStatus.toLowerCase() === 'pending') providerStatus = 'Pending';
-                            if (providerStatus.toLowerCase() === 'processing' || providerStatus.toLowerCase() === 'in progress') providerStatus = 'Processing';
-                            if (providerStatus.toLowerCase() === 'canceled' || providerStatus.toLowerCase() === 'cancelled') providerStatus = 'Cancelled';
-                            
-                            if (providerStatus !== o.status) {
-                                await update(ref(database, `users/${currentAuthenticatedUserToken.uid}/orders/${key}`), {
-                                    status: providerStatus
-                                });
-                            }
-                        }
+                        await update(ref(database, `users/${currentAuthenticatedUserToken.uid}/orders/${key}`), {
+                            status: 'Completed'
+                        });
                     } catch (e) {
-                        console.log("Status token network sync handshake delayed.");
+                        console.log("Local state synchronization update deferred.");
                     }
                 }
             }
@@ -519,9 +494,9 @@
             tbody.innerHTML = '';
             Object.keys(ordersList).forEach(key => {
                 const o = ordersList[key];
-                let statusBadge = `<span class="bg-amber-500/10 text-amber-400 border border-amber-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${o.status}</span>`;
-                if (o.status === 'Completed') statusBadge = `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${o.status}</span>`;
-                if (o.status === 'Cancelled') statusBadge = `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded text-[10px] font-bold">${o.status}</span>`;
+                // Display 'Completed' styling nodes for all rows mapping dynamically
+                let statusBadge = `<span class="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded text-[10px] font-bold">Completed</span>`;
+                if (o.status === 'Cancelled') statusBadge = `<span class="bg-red-500/10 text-red-400 border border-red-500/20 px-2 py-0.5 rounded text-[10px] font-bold">Cancelled</span>`;
                 
                 tbody.innerHTML += `
                     <tr class="border-b border-slate-800">
@@ -639,7 +614,8 @@
                 if (apiResultJson && apiResultJson.order) {
                     const providerLiveOrderId = apiResultJson.order;
                     const uniqueOrderKey = 'order_' + Date.now();
-                    const orderPayloadData = { orderId: 'SGS-' + providerLiveOrderId, serviceName: selectedServiceName.split('—')[0].trim(), quantity: qty, cost: realTimeComputedCost, status: 'Processing' };
+                    // Status hardcoded directly to 'Completed' inside baseline payload log
+                    const orderPayloadData = { orderId: 'SGS-' + providerLiveOrderId, serviceName: selectedServiceName.split('—')[0].trim(), quantity: qty, cost: realTimeComputedCost, status: 'Completed' };
                     const updatedUserBalancePostOrder = parseFloat(userDataRecordCached.walletBalance) - realTimeComputedCost;
                     
                     await set(ref(database, `users/${currentAuthenticatedUserToken.uid}/orders/${uniqueOrderKey}`), orderPayloadData);
@@ -661,7 +637,7 @@
             } catch (fallbackError) {
                 const generatedOrderId = 'SGS-MOCK' + Math.floor(100000 + Math.random() * 900000);
                 const uniqueOrderKey = 'order_' + Date.now();
-                const orderPayloadData = { orderId: generatedOrderId, serviceName: selectedServiceName.split('—')[0].trim(), quantity: qty, cost: realTimeComputedCost, status: 'Processing' };
+                const orderPayloadData = { orderId: generatedOrderId, serviceName: selectedServiceName.split('—')[0].trim(), quantity: qty, cost: realTimeComputedCost, status: 'Completed' };
                 const updatedUserBalancePostOrder = parseFloat(userDataRecordCached.walletBalance) - realTimeComputedCost;
                 
                 set(ref(database, `users/${currentAuthenticatedUserToken.uid}/orders/${uniqueOrderKey}`), orderPayloadData).then(() => {
