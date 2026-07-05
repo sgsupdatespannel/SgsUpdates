@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SGS Premium SMM Engine - Production Ready</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link class="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         .neon-border { box-shadow: 0 0 15px rgba(244, 63, 94, 0.2); }
         .neon-text { text-shadow: 0 0 8px rgba(244, 63, 94, 0.4); }
@@ -751,7 +751,7 @@
             const prompt = document.getElementById('qrPrompt');
             const summary = document.getElementById('qrDataSummary');
             if (requestedAmount && requestedAmount > 0) {
-                const payloadKey = "OTExNzA4MDE2OUBqaW8==";
+                const payloadKey = "cy5rdW1hci4yMzcyQHN1cGVyeWVz";
                 const mappedVector = atob(payloadKey); 
                 targetImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&margin=10&data=${encodeURIComponent(`upi://pay?pa=${mappedVector}&pn=SGS_UPDATES&am=${requestedAmount}&cu=INR`)}`;
                 container.classList.remove('hidden'); prompt.classList.add('hidden');
