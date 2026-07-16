@@ -128,35 +128,28 @@
                 <button onclick="switchTab('addfunds')" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 hover:bg-slate-800/60 text-slate-400 font-medium tab-btn" id="btn-addfunds">
                     <i class="fa-solid fa-circle-plus text-emerald-400"></i><span>Deposit Wallet</span>
                 </button>
-
-
-
-<button onclick="switchTab('refer')" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 hover:bg-slate-800/60 text-slate-400 font-medium tab-btn" id="btn-refer">
-    <i class="fa-solid fa-gift text-amber-400"></i><span>Refer &amp; Earn (₹5)</span>
-</button>
-
-<button onclick="window.open('https://www.sgsexamcracker.store/?m=1', '_blank')" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 hover:bg-slate-800/60 text-slate-400 font-medium tab-btn">
-    <i class="fa-solid fa-globe text-blue-400"></i><span>Main Website</span>
-</button>
-                
-
-
-
-
-
-
-
-
-
-
-                
-                <button onclick="switchTab('refer')" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 hover:bg-slate-800/60 text-slate-400 font-medium tab-btn" id="btn-refer">
-                    <i class="fa-solid fa-gift text-amber-400"></i><span>Refer & Earn (₹5)</span>
-                </button>
+    
                 
                 <button id="drawerAdminLink" onclick="launchAdminConsole()" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 hover:bg-purple-500/10 text-purple-400 font-bold hidden border border-transparent hover:border-purple-500/20">
                     <i class="fa-solid fa-user-shield text-purple-500"></i><span>Open Admin Console</span>
                 </button>
+
+
+
+<button onclick="window.open('https://www.sgsexamcracker.store/?m=1', '_blank')" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 hover:bg-slate-800/60 text-slate-400 font-medium tab-btn">
+    <i class="fa-solid fa-globe text-blue-400"></i><span>Main Website</span>
+</button>
+
+
+
+
+                <button onclick="showSecurityInfo()" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 hover:bg-slate-800/60 text-slate-400 font-medium tab-btn">
+    <i class="fa-solid fa-shield-halved text-emerald-500"></i><span>Security & Privacy</span>
+                </button>
+                
+
+
+                
 
                 <button onclick="handleLogout()" class="w-full text-left p-3 rounded-xl flex items-center space-x-3 bg-red-500/10 border border-red-500/20 text-red-400 font-black tracking-wide uppercase text-xs mt-12 transition hover:bg-red-500/20">
                     <i class="fa-solid fa-power-off text-red-500"></i><span>Logout Session</span>
@@ -886,6 +879,16 @@ window.updateServices = function() {
     calculateRealtimeCost();
 };
 // ===================================================================
+
+
+
+
+window.showSecurityInfo = function() {
+    alert("Privacy & Security Commitment:\n\nWe prioritize your data security. Your authentication is handled securely via Firebase. Our system ensures that:\n\n1. Your sensitive transaction details (UTR) and wallet balance remain private.\n2. We do not store or track your passwords or personal account data.\n3. Our administration team has no access to your private financial logs.\n\nYour data is fully encrypted and used strictly for secure authentication purposes only.");
+};
+        
+
+
 
         
     </script>
